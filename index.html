@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank of Trusts - Educational Demo Only</title>
+  <style>
+    :root {
+      --bg: #0a1628;
+      --card: rgba(15, 23, 42, 0.82);
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #4ade80;
+      --red: #f87171;
+    }
+    body.light {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0284c7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background: var(--bg);
+      transition: background 0.3s, color 0.3s;
+    }
+    .bg-animation {
+      position: fixed; inset: 0; z-index: -1;
+      background: linear-gradient(125deg, #0a1628, #0f2744, #0c4a6e, #0f2744, #0a1628);
+      background-size: 400% 400%;
+      animation: gradientMove 18s ease infinite;
+      opacity: 0.9;
+    }
+    body.light .bg-animation { opacity: 0.15; }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* LOGIN */
+    #loginPage {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .login-card {
+      background: var(--card); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); padding: 2.5rem; border-radius: 20px;
+      width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .login-logo { text-align: center; margin-bottom: 1rem; }
+    .login-logo img { max-width: 230px; height: auto; }
+    .demo-badge {
+      display: inline-block; background: rgba(239, 68, 68, 0.2); color: #fca5a5;
+      font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px;
+      margin-bottom: 1.3rem; border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    label { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: var(--muted); }
+    input, select {
+      width: 100%; padding: 0.8rem 1rem; margin-bottom: 1rem;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: rgba(15, 23, 42, 0.5); color: var(--text); font-size: 1rem;
+    }
+    body.light input, body.light select { background: #f8fafc; }
+    button.primary {
+      width: 100%; padding: 0.9rem; background: linear-gradient(90deg, #0ea5e9, #2563eb);
+      color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;
+    }
+    .error-msg {
+      background: rgba(127, 29, 29, 0.45); color: #fecaca; padding: 0.8rem;
+      border-radius: 8px; text-align: center; margin-top: 1rem; display: none;
+    }
+    .credentials { margin-top: 1.4rem; font-size: 0.8rem; color: var(--muted); text-align: center; }
+
+    /* DASHBOARD LAYOUT */
+    #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px; }
+    .top-bar {
+      background: var(--card); border: 1px solid var(--border); padding: 0.8rem 1.3rem;
+      border-radius: 14px; display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 12px; }
+    .top-bar-left img { height: 42px; width: auto; }
+    .bank-name { font-size: 1.2rem; font-weight: 700; }
+    .user-info { font-size: 0.85rem; color: var(--muted); }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-btn, .logout-btn, .theme-btn {
+      padding: 0.4rem 0.9rem; background: rgba(51, 65, 85, 0.7);
+      border: 1px solid var(--border); color: var(--text); border-radius: 8px;
+      cursor: pointer; font-size: 0.85rem;
+    }
+    .nav-btn.active { background: #0ea5e9; border-color: #0ea5e9; color: white; }
+    body.light .nav-btn, body.light .logout-btn, body.light .theme-btn {
+      background: #e2e8f0; color: #0f172a;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .balance-card {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(37, 99, 235, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.3); padding: 1.6rem; border-radius: 16px; margin-bottom: 1.4rem;
+    }
+    .balance-label { font-size: 0.95rem; color: #bae6fd; }
+    body.light .balance-label { color: #0369a1; }
+    .balance-amount { font-size: 2.4rem; font-weight: 700; margin-top: 0.25rem; }
+    .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.35rem; }
+
+    .features {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.9rem; margin-bottom: 1.4rem;
+    }
+    .feature-btn {
+      background: var(--card); border: 1px solid var(--border); padding: 1.1rem 0.7rem;
+      border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s;
+    }
+    .feature-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .feature-btn .icon { font-size: 1.45rem; margin-bottom: 0.3rem; }
+    .feature-btn .label { font-size: 0.88rem; }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.3rem; margin-bottom: 1.3rem;
+    }
+    .card h3 { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
+
+    #transferPanel { display: none; }
+    .panel-title { font-size: 1.15rem; color: var(--accent); margin-bottom: 1.1rem; font-weight: 600; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .full-btn {
+      background: rgba(51, 65, 85, 0.85); border: 1px solid var(--border);
+      color: var(--text); width: 100%; padding: 0.7rem; border-radius: 10px;
+      margin-bottom: 0.8rem; cursor: pointer;
+    }
+    .waiting-box {
+      background: rgba(120, 53, 15, 0.4); border: 1px solid rgba(251, 191, 36, 0.4);
+      color: #fde68a; padding: 1rem; border-radius: 10px; text-align: center;
+      margin-top: 1rem; display: none;
+    }
+
+    .tx {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+    }
+    .tx:last-child { border-bottom: none; }
+    .tx-name { font-weight: 500; }
+    .tx-date { font-size: 0.8rem; color: var(--muted); }
+    .in { color: var(--green); font-weight: 600; }
+    .out { color: var(--red); font-weight: 600; }
+
+    /* Cards section */
+    .card-item {
+      background: linear-gradient(135deg, #1e3a5f, #0f172a);
+      border-radius: 14px; padding: 1.4rem; margin-bottom: 1rem; color: white;
+      position: relative; overflow: hidden;
+    }
+    body.light .card-item { background: linear-gradient(135deg, #0369a1, #0c4a6e); }
+    .card-type { font-size: 0.85rem; opacity: 0.85; }
+    .card-number { font-size: 1.25rem; letter-spacing: 2px; margin: 0.8rem 0; font-family: monospace; }
+    .card-footer { display: flex; justify-content: space-between; font-size: 0.9rem; }
+    .card-actions { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
+    .card-actions button {
+      padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer;
+      font-size: 0.8rem; background: rgba(255,255,255,0.15); color: white;
+    }
+
+    /* Profile */
+    .profile-row {
+      display: flex; justify-content: space-between; padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border); font-size: 0.95rem;
+    }
+    .profile-row:last-child { border-bottom: none; }
+    .profile-label { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <!-- ========== LOGIN ========== -->
+  <div id="loginPage">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 230px; height: auto;">
+      </div>
+      <div style="text-align:center">
+        <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
+      </div>
+      <form id="loginForm">
+        <label>Username / Account Number</label>
+        <input type="text" id="username" placeholder="Enter username" required>
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+        <button type="submit" class="primary">Sign In Securely</button>
+      </form>
+      <div id="loginError" class="error-msg">Invalid username or password</div>
+      <p class="credentials">
+        <strong>Demo credentials:</strong><br>
+        Username: demo<br>Password: password123
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== DASHBOARD ========== -->
+  <div id="dashboardPage">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <img src="logo.jpg" alt="Logo" style="height: 42px; width: auto;">
+        <div>
+          <div class="bank-name">Bank of Trusts</div>
+          <div class="user-info">Welcome, Demo User</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" onclick="showSection('home')">Dashboard</button>
+        <button class="nav-btn" onclick="showSection('cards')">Cards</button>
+        <button class="nav-btn" onclick="showSection('profile')">Profile</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+      </div>
+    </div>
+
+    <!-- HOME SECTION -->
+    <div id="section-home" class="section active">
+      <div class="balance-card">
+        <div class="balance-label">Available Balance</div>
+        <div class="balance-amount" id="balanceDisplay">$1,750,000.00</div>
+        <div class="balance-note">Demo account • For learning purposes only</div>
+      </div>
+
+      <div class="features">
+        <div class="feature-btn" onclick="showTransfer()">
+          <div class="icon">↗️</div>
+          <div class="label">Transfer</div>
+        </div>
+        <div class="feature-btn" onclick="alert('Demo only – Pay Bills')">
+          <div class="icon">💡</div>
+          <div class="label">Pay Bills</div>
+        </div>
+        <div class="feature-btn" onclick="alert('Demo only – Mobile Deposit')">
+          <div class="icon">📱</div>
+          <div class="label">Mobile Deposit</div>
+        </div>
+        <div class="feature-btn" onclick="showSection('cards')">
+          <div class="icon">💳</div>
+          <div class="label">Cards</div>
+        </div>
+        <div class="feature-btn" onclick="alert('Demo only – Statements')">
+          <div class="icon">📄</div>
+          <div class="label">Statements</div>
+        </div>
+        <div class="feature-btn" onclick="showSection('profile')">
+          <div class="icon">👤</div>
+          <div class="label">Profile</div>
+        </div>
+      </div>
+
+      <!-- Transfer Panel -->
+      <div class="card" id="transferPanel">
+        <div class="panel-title">Transfer Funds (Demo)</div>
+        <label>Choose Bank to Transfer To</label>
+        <select id="bankSelect">
+          <option value="">-- Select a bank --</option>
+          <option>Chase Bank</option>
+          <option>Bank of America</option>
+          <option>Wells Fargo</option>
+          <option>Citibank</option>
+          <option>U.S. Bank</option>
+          <option>PNC Bank</option>
+          <option>Capital One</option>
+          <option>TD Bank</option>
+          <option>Truist Bank</option>
+          <option>Other Bank</option>
+        </select>
+        <div class="form-row">
+          <div>
+            <label>Account Number</label>
+            <input type="text" id="accountNumber" placeholder="Account number">
+          </div>
+          <div>
+            <label>Routing Number</label>
+            <input type="text" id="routingNumber" placeholder="Routing number">
+          </div>
+        </div>
+        <label>Amount ($)</label>
+        <input type="number" id="transferAmount" placeholder="0.00" min="0" step="0.01">
+        <button class="full-btn" onclick="useFullBalance()">Use Full Balance ($1,750,000.00)</button>
+        <button class="primary" onclick="completeTransfer()">Complete Transfer</button>
+        <div id="waitingMsg" class="waiting-box">
+          ⏳ Waiting for approval...<br>
+          <small>This is a simulated message only. No real money moves.</small>
+        </div>
+      </div>
+
+      <!-- Dynamic Transactions -->
+      <div class="card">
+        <h3>Recent Account Activity (Dynamic)</h3>
+        <div id="transactionList"></div>
+      </div>
+    </div>
+
+    <!-- CARDS SECTION -->
+    <div id="section-cards" class="section">
+      <div class="card">
+        <h3>Your Credit & Debit Cards (Demo)</h3>
+
+        <div class="card-item">
+          <div class="card-type">Visa Platinum • Credit</div>
+          <div class="card-number">•••• •••• •••• 4821</div>
+          <div class="card-footer">
+            <span>Demo User</span>
+            <span>Exp 08/28</span>
+          </div>
+          <div class="card-actions">
+            <button onclick="alert('Demo: Card frozen temporarily')">Freeze Card</button>
+            <button onclick="alert('Demo: PIN change requested')">Change PIN</button>
+            <button onclick="alert('Demo: Limit increase requested')">Request Limit</button>
+          </div>
+        </div>
+
+        <div class="card-item" style="background: linear-gradient(135deg, #334155, #1e293b);">
+          <div class="card-type">Mastercard Debit</div>
+          <div class="card-number">•••• •••• •••• 7394</div>
+          <div class="card-footer">
+            <span>Demo User</span>
+            <span>Exp 11/27</span>
+          </div>
+          <div class="card-actions">
+            <button onclick="alert('Demo: Card frozen temporarily')">Freeze Card</button>
+            <button onclick="alert('Demo: PIN change requested')">Change PIN</button>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 1rem;">
+          All card actions are simulated for learning purposes only.
+        </p>
+      </div>
+    </div>
+
+    <!-- PROFILE SECTION -->
+    <div id="section-profile" class="section">
+      <div class="card">
+        <h3>Profile Information (Demo)</h3>
+        <div class="profile-row">
+          <span class="profile-label">Full Name</span>
+          <span>Demo User</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Email</span>
+          <span>demo.user@example.com</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Phone</span>
+          <span>+1 (555) 010-9999</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Account Number</span>
+          <span>•••• 4821</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Member Since</span>
+          <span>July 2026</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Account Status</span>
+          <span style="color: var(--green)">Active (Demo)</span>
+        </div>
+        <button class="primary" style="margin-top: 1.2rem;" onclick="alert('Demo only – Profile update not saved')">
+          Edit Profile (Demo)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const VALID_USER = "demo";
+    const VALID_PASS = "password123";
+    let currentBalance = 1750000.00;
+
+    // Dynamic transaction data
+    let transactions = [
+      { name: "Authorized Winning Amount", date: "Jul 26, 2026 • Credit", amount: 1750150.00, type: "in" },
+      { name: "Account created for withdrawal – Processing Fee", date: "Jul 26, 2026 • Debit", amount: -150.00, type: "out" },
+      { name: "Interest Credit", date: "Jul 20, 2026 • Credit", amount: 42.18, type: "in" },
+      { name: "Monthly Account Maintenance", date: "Jul 15, 2026 • Debit", amount: -4.99, type: "out" }
+    ];
+
+    function renderTransactions() {
+      const list = document.getElementById("transactionList");
+      list.innerHTML = "";
+      transactions.forEach(tx => {
+        const div = document.createElement("div");
+        div.className = "tx";
+        div.innerHTML = `
+          <div>
+            <div class="tx-name">${tx.name}</div>
+            <div class="tx-date">${tx.date}</div>
+          </div>
+          <div class="${tx.type}">${tx.type === "in" ? "+" : ""}$${Math.abs(tx.amount).toLocaleString("en-US", {minimumFractionDigits: 2})}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value;
+      if (user === VALID_USER && pass === VALID_PASS) {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+        document.getElementById("loginError").style.display = "none";
+        renderTransactions();
+      } else {
+        document.getElementById("loginError").style.display = "block";
+      }
+    });
+
+    function logout() {
+      document.getElementById("dashboardPage").style.display = "none";
+      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      hideTransfer();
+      showSection("home");
+    }
+
+    function showSection(name) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.getElementById("section-" + name).classList.add("active");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+      // simple active state for main nav buttons
+      const buttons = document.querySelectorAll(".nav-btn");
+      if (name === "home") buttons[0].classList.add("active");
+      if (name === "cards") buttons[1].classList.add("active");
+      if (name === "profile") buttons[2].classList.add("active");
+    }
+
+    function showTransfer() {
+      document.getElementById("transferPanel").style.display = "block";
+      document.getElementById("waitingMsg").style.display = "none";
+      showSection("home");
+    }
+
+    function hideTransfer() {
+      document.getElementById("transferPanel").style.display = "none";
+      document.getElementById("waitingMsg").style.display = "none";
+      document.getElementById("accountNumber").value = "";
+      document.getElementById("routingNumber").value = "";
+      document.getElementById("transferAmount").value = "";
+      document.getElementById("bankSelect").value = "";
+    }
+
+    function useFullBalance() {
+      document.getElementById("transferAmount").value = currentBalance.toFixed(2);
+    }
+
+    function completeTransfer() {
+      const bank = document.getElementById("bankSelect").value;
+      const account = document.getElementById("accountNumber").value.trim();
+      const routing = document.getElementById("routingNumber").value.trim();
+      const amount = parseFloat(document.getElementById("transferAmount").value);
+
+      if (!bank || !account || !routing || !amount || amount <= 0) {
+        alert("Please fill all required fields with valid values.");
+        return;
+      }
+
+      // Show waiting message
+      document.getElementById("waitingMsg").style.display = "block";
+
+      // Simulate adding a pending transaction after a short delay
+      setTimeout(() => {
+        const today = new Date();
+        const dateStr = today.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) + " • Pending";
+        transactions.unshift({
+          name: `Transfer to ${bank} (Pending Approval)`,
+          date: dateStr,
+          amount: -amount,
+          type: "out"
+        });
+        renderTransactions();
+      }, 1200);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+
+    // Initial render (in case needed)
+    renderTransactions();
+  </script>
+</body>
+</html>
