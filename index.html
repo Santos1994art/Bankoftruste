@@ -6,14 +6,9 @@
   <title>Bank of Trusts - Educational Demo Only</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
 
-    body {
-      min-height: 100vh;
-      color: #e2e8f0;
-      background: #0a1628;
-    }
-
-    /* ========== LOGIN PAGE ========== */
+    /* LOGIN PAGE */
     #loginPage {
       min-height: 100vh;
       display: flex;
@@ -25,11 +20,10 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(10, 22, 40, 0.68);
+      background: rgba(10, 22, 40, 0.55);
       z-index: 0;
     }
 
-    /* Top FDIC bar */
     .fdic-bar {
       position: relative;
       z-index: 2;
@@ -39,7 +33,6 @@
       padding: 9px 15px;
       font-size: 0.82rem;
       font-weight: 500;
-      letter-spacing: 0.2px;
     }
 
     .login-content {
@@ -56,7 +49,6 @@
       width: 100%;
     }
 
-    /* Left side feature buttons */
     .left-features {
       display: flex;
       flex-direction: column;
@@ -64,7 +56,7 @@
       min-width: 200px;
     }
     .left-feature {
-      background: rgba(15, 23, 42, 0.55);
+      background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(255,255,255,0.18);
       color: #f1f5f9;
       font-weight: 700;
@@ -73,7 +65,6 @@
       border-radius: 10px;
       cursor: pointer;
       transition: 0.2s;
-      text-align: left;
       backdrop-filter: blur(6px);
     }
     .left-feature:hover {
@@ -82,136 +73,128 @@
       transform: translateX(4px);
     }
 
-    /* Right side - headline + login card */
     .right-side {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      max-width: 420px;
+      max-width: 380px;
       width: 100%;
     }
 
-    .main-headline {
-      text-align: right;
-      margin-bottom: 6px;
-    }
     .main-headline h1 {
-      font-size: 1.75rem;
+      font-size: 1.7rem;
       font-weight: 700;
       color: #ffffff;
+      text-align: right;
       line-height: 1.25;
     }
     .sub-headline {
       text-align: right;
       color: #cbd5e1;
-      font-size: 0.98rem;
-      margin-bottom: 22px;
+      font-size: 0.95rem;
+      margin: 6px 0 18px;
     }
 
     .login-card {
-      background: rgba(15, 23, 42, 0.72);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 1.6rem 1.5rem;
-      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.58);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 1.35rem 1.4rem;
+      border-radius: 14px;
       width: 100%;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
-    .login-logo {
-      text-align: center;
-      margin-bottom: 0.6rem;
-    }
-    .login-logo img {
-      max-width: 170px;
-      height: auto;
-    }
+    .login-logo { text-align: center; margin-bottom: 0.5rem; }
+    .login-logo img { max-width: 155px; height: auto; }
     .demo-badge {
       display: inline-block;
       background: rgba(239, 68, 68, 0.22);
       color: #fca5a5;
-      font-size: 0.68rem;
-      padding: 0.22rem 0.65rem;
+      font-size: 0.66rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
       border: 1px solid rgba(239, 68, 68, 0.3);
     }
     label {
       display: block;
-      margin-bottom: 0.25rem;
-      font-size: 0.84rem;
+      margin-bottom: 0.22rem;
+      font-size: 0.82rem;
       color: #94a3b8;
     }
     input {
       width: 100%;
-      padding: 0.65rem 0.85rem;
-      margin-bottom: 0.85rem;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.75rem;
       border: 1px solid rgba(148, 163, 184, 0.28);
       border-radius: 8px;
-      background: rgba(15, 23, 42, 0.55);
+      background: rgba(15, 23, 42, 0.5);
       color: white;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
     }
-    input:focus {
-      outline: none;
-      border-color: #38bdf8;
-    }
+    input:focus { outline: none; border-color: #38bdf8; }
     button.primary {
       width: 100%;
-      padding: 0.72rem;
+      padding: 0.68rem;
       background: linear-gradient(90deg, #0ea5e9, #2563eb);
       color: white;
       border: none;
       border-radius: 8px;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-    }
-    button.primary:hover {
-      filter: brightness(1.08);
     }
     .error-msg {
       background: rgba(127, 29, 29, 0.5);
       color: #fecaca;
-      padding: 0.65rem;
+      padding: 0.6rem;
       border-radius: 8px;
       text-align: center;
-      margin-top: 0.8rem;
+      margin-top: 0.7rem;
       display: none;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
     .create-account {
       text-align: center;
-      margin-top: 0.95rem;
-      font-size: 0.88rem;
+      margin-top: 0.85rem;
+      font-size: 0.85rem;
       color: #94a3b8;
     }
-    .create-account span {
-      color: #38bdf8;
-      cursor: default;
+    .create-account span { color: #38bdf8; cursor: default; }
+
+    /* Approval code section */
+    #approvalSection { display: none; }
+    .locked-msg {
+      background: rgba(127, 29, 29, 0.55);
+      color: #fecaca;
+      padding: 0.9rem;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.9rem;
+      display: none;
     }
 
-    /* Bottom section */
     .login-bottom {
       position: relative;
       z-index: 1;
-      padding: 18px 20px 12px;
+      padding: 16px 20px 12px;
       text-align: center;
     }
     .bottom-columns {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 50px;
-      margin-bottom: 14px;
+      gap: 45px;
+      margin-bottom: 12px;
     }
     .bottom-col h4 {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #f1f5f9;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .bottom-col p {
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: #94a3b8;
       margin: 3px 0;
       cursor: default;
@@ -219,97 +202,78 @@
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 12px;
-      font-size: 1.25rem;
+      gap: 15px;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
     }
-    .social-icons span { cursor: default; opacity: 0.85; }
-    .footer-tiny {
-      font-size: 0.7rem;
-      color: #64748b;
-    }
+    .footer-tiny { font-size: 0.68rem; color: #64748b; }
 
-    /* Responsive */
     @media (max-width: 900px) {
-      .login-content {
-        flex-direction: column;
-        padding: 25px 20px;
-      }
-      .left-features {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-      }
-      .right-side {
-        align-items: center;
-      }
-      .main-headline, .sub-headline {
-        text-align: center;
-      }
+      .login-content { flex-direction: column; padding: 25px 18px; }
+      .left-features { flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .right-side { align-items: center; }
+      .main-headline h1, .sub-headline { text-align: center; }
     }
 
-    /* ========== DASHBOARD (unchanged core) ========== */
-    #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px; }
+    /* DASHBOARD styles kept short for space */
+    #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px; }
     .top-bar {
-      background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(148,163,184,0.2);
-      padding: 0.8rem 1.3rem; border-radius: 14px;
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;
+      background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.2);
+      padding: 0.8rem 1.2rem; border-radius: 14px; display: flex;
+      justify-content: space-between; align-items: center; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 10px;
     }
     .top-bar-left { display: flex; align-items: center; gap: 12px; }
-    .top-bar-left img { height: 42px; width: auto; }
-    .bank-name { font-size: 1.2rem; font-weight: 700; }
+    .top-bar-left img { height: 40px; }
+    .bank-name { font-size: 1.15rem; font-weight: 700; }
     .user-info { font-size: 0.85rem; color: #94a3b8; }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav-btn, .logout-btn, .theme-btn {
-      padding: 0.4rem 0.9rem; background: rgba(51, 65, 85, 0.7);
+      padding: 0.4rem 0.85rem; background: rgba(51,65,85,0.7);
       border: 1px solid rgba(148,163,184,0.25); color: #e2e8f0;
       border-radius: 8px; cursor: pointer; font-size: 0.85rem;
     }
-    .nav-btn.active { background: #0ea5e9; border-color: #0ea5e9; color: white; }
+    .nav-btn.active { background: #0ea5e9; color: white; }
     .section { display: none; }
     .section.active { display: block; }
     .balance-card {
       background: linear-gradient(135deg, rgba(14,165,233,0.25), rgba(37,99,235,0.15));
-      border: 1px solid rgba(56,189,248,0.3); padding: 1.6rem; border-radius: 16px; margin-bottom: 1.4rem;
+      border: 1px solid rgba(56,189,248,0.3); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.3rem;
     }
     .balance-label { font-size: 0.95rem; color: #bae6fd; }
-    .balance-amount { font-size: 2.4rem; font-weight: 700; margin-top: 0.25rem; }
-    .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.35rem; }
+    .balance-amount { font-size: 2.3rem; font-weight: 700; margin-top: 0.2rem; }
+    .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.3rem; }
     .features {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 0.9rem; margin-bottom: 1.4rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.8rem; margin-bottom: 1.3rem;
     }
     .feature-btn {
       background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
-      padding: 1.1rem 0.7rem; border-radius: 12px; text-align: center; cursor: pointer;
+      padding: 1rem 0.6rem; border-radius: 12px; text-align: center; cursor: pointer;
     }
     .feature-btn:hover { border-color: #38bdf8; }
-    .feature-btn .icon { font-size: 1.45rem; margin-bottom: 0.3rem; }
-    .feature-btn .label { font-size: 0.88rem; }
+    .feature-btn .icon { font-size: 1.4rem; margin-bottom: 0.25rem; }
     .card {
       background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
-      border-radius: 14px; padding: 1.3rem; margin-bottom: 1.3rem;
+      border-radius: 14px; padding: 1.2rem; margin-bottom: 1.2rem;
     }
-    .card h3 { font-size: 1rem; color: #94a3b8; margin-bottom: 1rem; }
+    .card h3 { font-size: 1rem; color: #94a3b8; margin-bottom: 0.9rem; }
     #transferPanel { display: none; }
-    .panel-title { font-size: 1.15rem; color: #38bdf8; margin-bottom: 1.1rem; font-weight: 600; }
+    .panel-title { font-size: 1.1rem; color: #38bdf8; margin-bottom: 1rem; font-weight: 600; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     .full-btn {
       background: rgba(51,65,85,0.85); border: 1px solid rgba(148,163,184,0.25);
-      color: #e2e8f0; width: 100%; padding: 0.7rem; border-radius: 10px;
-      margin-bottom: 0.8rem; cursor: pointer;
+      color: #e2e8f0; width: 100%; padding: 0.65rem; border-radius: 8px;
+      margin-bottom: 0.7rem; cursor: pointer;
     }
     .waiting-box {
       background: rgba(120,53,15,0.4); border: 1px solid rgba(251,191,36,0.4);
-      color: #fde68a; padding: 1rem; border-radius: 10px; text-align: center;
-      margin-top: 1rem; display: none;
+      color: #fde68a; padding: 0.9rem; border-radius: 8px; text-align: center;
+      margin-top: 0.9rem; display: none;
     }
     .tx {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.85rem 0; border-bottom: 1px solid rgba(51,65,85,0.6);
+      display: flex; justify-content: space-between; padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(51,65,85,0.55);
     }
     .tx:last-child { border-bottom: none; }
     .tx-name { font-weight: 500; }
@@ -318,19 +282,19 @@
     .out { color: #f87171; font-weight: 600; }
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
-      border-radius: 14px; padding: 1.4rem; margin-bottom: 1rem; color: white;
+      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white;
     }
     .card-type { font-size: 0.85rem; opacity: 0.85; }
-    .card-number { font-size: 1.25rem; letter-spacing: 2px; margin: 0.8rem 0; font-family: monospace; }
+    .card-number { font-size: 1.2rem; letter-spacing: 2px; margin: 0.7rem 0; font-family: monospace; }
     .card-footer { display: flex; justify-content: space-between; font-size: 0.9rem; }
-    .card-actions { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
+    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
     .card-actions button {
-      padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer;
+      padding: 0.35rem 0.7rem; border-radius: 6px; border: none; cursor: pointer;
       font-size: 0.8rem; background: rgba(255,255,255,0.15); color: white;
     }
     .profile-row {
-      display: flex; justify-content: space-between; padding: 0.7rem 0;
-      border-bottom: 1px solid rgba(51,65,85,0.6); font-size: 0.95rem;
+      display: flex; justify-content: space-between; padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(51,65,85,0.55); font-size: 0.95rem;
     }
     .profile-row:last-child { border-bottom: none; }
     .profile-label { color: #94a3b8; }
@@ -338,15 +302,13 @@
 </head>
 <body>
 
-  <!-- ==================== LOGIN PAGE ==================== -->
+  <!-- LOGIN PAGE -->
   <div id="loginPage">
-    <!-- White FDIC top bar -->
     <div class="fdic-bar">
       FDIC FDIC-Insured - Backed by the full faith and credit of the Government
     </div>
 
     <div class="login-content">
-      <!-- LEFT side feature buttons -->
       <div class="left-features">
         <div class="left-feature">Credit Cards</div>
         <div class="left-feature">Checking & Savings</div>
@@ -354,43 +316,50 @@
         <div class="left-feature">Business</div>
       </div>
 
-      <!-- RIGHT side -->
       <div class="right-side">
         <div class="main-headline">
           <h1>Grow Your Money With Confidence</h1>
         </div>
-        <div class="sub-headline">
-          - Your Future &nbsp;&nbsp; - Our Priority
-        </div>
+        <div class="sub-headline">- Your Future &nbsp;&nbsp; - Our Priority</div>
 
         <div class="login-card">
           <div class="login-logo">
-            <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 170px; height: auto;">
+            <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 155px;">
           </div>
           <div style="text-align:center">
             <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
           </div>
 
-          <form id="loginForm">
-            <label>Username / Account Number</label>
-            <input type="text" id="username" placeholder="Enter username" required>
+          <!-- Step 1: Username & Password -->
+          <div id="loginStep">
+            <form id="loginForm">
+              <label>Username / Account Number</label>
+              <input type="text" id="username" placeholder="Enter username" required>
+              <label>Password</label>
+              <input type="password" id="password" placeholder="Enter password" required>
+              <button type="submit" class="primary">Sign In</button>
+            </form>
+            <div id="loginError" class="error-msg"></div>
+            <div class="create-account">
+              Don’t have an account? <span>Create account</span>
+            </div>
+          </div>
 
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter password" required>
-
-            <button type="submit" class="primary">Sign In</button>
-          </form>
-
-          <div id="loginError" class="error-msg">Invalid username or password</div>
-
-          <div class="create-account">
-            Don’t have an account? <span>Create account</span>
+          <!-- Step 2: Approval Code -->
+          <div id="approvalSection">
+            <label>Approval code from bank management</label>
+            <input type="text" id="approvalCode" placeholder="Enter 6-digit code" maxlength="6">
+            <button class="primary" onclick="checkApprovalCode()">Verify Code</button>
+            <div id="codeError" class="error-msg"></div>
+            <div id="lockedMsg" class="locked-msg">
+              Account locked due to too many incorrect attempts.<br>
+              Please contact support (Demo only).
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bottom -->
     <div class="login-bottom">
       <div class="bottom-columns">
         <div class="bottom-col">
@@ -404,35 +373,29 @@
           <p>Security</p>
         </div>
       </div>
-
       <div class="social-icons">
-        <span title="Facebook">📘</span>
-        <span title="Instagram">📷</span>
-        <span title="TikTok">🎵</span>
-        <span title="X">𝕏</span>
+        <span>📘</span><span>📷</span><span>🎵</span><span>𝕏</span>
       </div>
-
       <div class="footer-tiny">
         © 2026 Capital Trusts Member FDIC. Equal Housing Lender
       </div>
     </div>
   </div>
 
-  <!-- ==================== DASHBOARD ==================== -->
+  <!-- DASHBOARD -->
   <div id="dashboardPage">
     <div class="top-bar">
       <div class="top-bar-left">
-        <img src="logo.jpg" alt="Logo" style="height: 42px; width: auto;">
+        <img src="logo.jpg" alt="Logo" style="height: 40px;">
         <div>
           <div class="bank-name">Bank of Trusts</div>
-          <div class="user-info">Welcome, Demo User</div>
+          <div class="user-info">Welcome, Wanda</div>
         </div>
       </div>
       <div class="nav-links">
         <button class="nav-btn active" onclick="showSection('home')">Dashboard</button>
         <button class="nav-btn" onclick="showSection('cards')">Cards</button>
         <button class="nav-btn" onclick="showSection('profile')">Profile</button>
-        <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
         <button class="logout-btn" onclick="logout()">Log Out</button>
       </div>
     </div>
@@ -445,30 +408,12 @@
       </div>
 
       <div class="features">
-        <div class="feature-btn" onclick="showTransfer()">
-          <div class="icon">↗️</div>
-          <div class="label">Transfer</div>
-        </div>
-        <div class="feature-btn" onclick="alert('Demo only')">
-          <div class="icon">💡</div>
-          <div class="label">Pay Bills</div>
-        </div>
-        <div class="feature-btn" onclick="alert('Demo only')">
-          <div class="icon">📱</div>
-          <div class="label">Mobile Deposit</div>
-        </div>
-        <div class="feature-btn" onclick="showSection('cards')">
-          <div class="icon">💳</div>
-          <div class="label">Cards</div>
-        </div>
-        <div class="feature-btn" onclick="alert('Demo only')">
-          <div class="icon">📄</div>
-          <div class="label">Statements</div>
-        </div>
-        <div class="feature-btn" onclick="showSection('profile')">
-          <div class="icon">👤</div>
-          <div class="label">Profile</div>
-        </div>
+        <div class="feature-btn" onclick="showTransfer()"><div class="icon">↗️</div><div class="label">Transfer</div></div>
+        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">💡</div><div class="label">Pay Bills</div></div>
+        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">📱</div><div class="label">Mobile Deposit</div></div>
+        <div class="feature-btn" onclick="showSection('cards')"><div class="icon">💳</div><div class="label">Cards</div></div>
+        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">📄</div><div class="label">Statements</div></div>
+        <div class="feature-btn" onclick="showSection('profile')"><div class="icon">👤</div><div class="label">Profile</div></div>
       </div>
 
       <div class="card" id="transferPanel">
@@ -519,22 +464,7 @@
         <div class="card-item">
           <div class="card-type">Visa Platinum • Credit</div>
           <div class="card-number">•••• •••• •••• 4821</div>
-          <div class="card-footer">
-            <span>Demo User</span>
-            <span>Exp 08/28</span>
-          </div>
-          <div class="card-actions">
-            <button onclick="alert('Demo only')">Freeze Card</button>
-            <button onclick="alert('Demo only')">Change PIN</button>
-          </div>
-        </div>
-        <div class="card-item" style="background: linear-gradient(135deg, #334155, #1e293b);">
-          <div class="card-type">Mastercard Debit</div>
-          <div class="card-number">•••• •••• •••• 7394</div>
-          <div class="card-footer">
-            <span>Demo User</span>
-            <span>Exp 11/27</span>
-          </div>
+          <div class="card-footer"><span>Wanda</span><span>Exp 08/28</span></div>
           <div class="card-actions">
             <button onclick="alert('Demo only')">Freeze Card</button>
             <button onclick="alert('Demo only')">Change PIN</button>
@@ -546,9 +476,8 @@
     <div id="section-profile" class="section">
       <div class="card">
         <h3>Profile Information (Demo)</h3>
-        <div class="profile-row"><span class="profile-label">Full Name</span><span>Demo User</span></div>
-        <div class="profile-row"><span class="profile-label">Email</span><span>demo.user@example.com</span></div>
-        <div class="profile-row"><span class="profile-label">Phone</span><span>+1 (555) 010-9999</span></div>
+        <div class="profile-row"><span class="profile-label">Full Name</span><span>Wanda</span></div>
+        <div class="profile-row"><span class="profile-label">Email</span><span>wanda@example.com</span></div>
         <div class="profile-row"><span class="profile-label">Account Number</span><span>•••• 4821</span></div>
         <div class="profile-row"><span class="profile-label">Status</span><span style="color:#4ade80">Active (Demo)</span></div>
       </div>
@@ -556,8 +485,11 @@
   </div>
 
   <script>
-    const VALID_USER = "demo";
-    const VALID_PASS = "password123";
+    const VALID_USER = "Wanda";
+    const VALID_PASS = "Fussy27shadow!";
+    const VALID_CODE = "909010";
+    let codeAttempts = 0;
+    let isLocked = false;
     let currentBalance = 1750000.00;
 
     let transactions = [
@@ -585,25 +517,68 @@
       });
     }
 
+    // Step 1: Username + Password
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
+      if (isLocked) return;
+
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value;
+      const error = document.getElementById("loginError");
+
       if (user === VALID_USER && pass === VALID_PASS) {
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("dashboardPage").style.display = "block";
-        document.getElementById("loginError").style.display = "none";
-        renderTransactions();
+        // Show approval code step
+        document.getElementById("loginStep").style.display = "none";
+        document.getElementById("approvalSection").style.display = "block";
+        error.style.display = "none";
       } else {
-        document.getElementById("loginError").style.display = "block";
+        error.textContent = "Invalid username or password";
+        error.style.display = "block";
       }
     });
+
+    // Step 2: Approval Code
+    function checkApprovalCode() {
+      if (isLocked) return;
+
+      const code = document.getElementById("approvalCode").value.trim();
+      const codeError = document.getElementById("codeError");
+
+      if (code === VALID_CODE) {
+        // Success → go to dashboard
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+        renderTransactions();
+      } else {
+        codeAttempts++;
+        codeError.textContent = "Invalid";
+        codeError.style.display = "block";
+
+        if (codeAttempts >= 3) {
+          isLocked = true;
+          document.getElementById("approvalCode").disabled = true;
+          document.querySelector("#approvalSection .primary").disabled = true;
+          document.getElementById("lockedMsg").style.display = "block";
+          codeError.style.display = "none";
+        }
+      }
+    }
 
     function logout() {
       document.getElementById("dashboardPage").style.display = "none";
       document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("loginStep").style.display = "block";
+      document.getElementById("approvalSection").style.display = "none";
       document.getElementById("username").value = "";
       document.getElementById("password").value = "";
+      document.getElementById("approvalCode").value = "";
+      document.getElementById("loginError").style.display = "none";
+      document.getElementById("codeError").style.display = "none";
+      document.getElementById("lockedMsg").style.display = "none";
+      document.getElementById("approvalCode").disabled = false;
+      document.querySelector("#approvalSection .primary").disabled = false;
+      codeAttempts = 0;
+      isLocked = false;
       hideTransfer();
       showSection("home");
     }
@@ -627,8 +602,6 @@
     function hideTransfer() {
       const panel = document.getElementById("transferPanel");
       if (panel) panel.style.display = "none";
-      const msg = document.getElementById("waitingMsg");
-      if (msg) msg.style.display = "none";
     }
 
     function useFullBalance() {
@@ -656,10 +629,6 @@
         });
         renderTransactions();
       }, 1000);
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle("light");
     }
 
     renderTransactions();
