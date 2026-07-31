@@ -98,132 +98,202 @@
     }
 
     /* ===== DASHBOARD ===== */
-    #dashboardPage { display: none; max-width: 1100px; margin: 0 auto; padding: 20px 20px 60px; }
-    .top-bar {
-      background: rgba(15,23,42,0.92); border: 1px solid rgba(148,163,184,0.2);
-      padding: 0.75rem 1.2rem; border-radius: 14px; display: flex;
-      justify-content: space-between; align-items: center; margin-bottom: 1.4rem;
+    #dashboardPage {
+      display: none;
+      min-height: 100vh;
+      background: url('dashboard-bg.jpg') center center / cover no-repeat;
+      position: relative;
     }
-    .top-bar-left { display: flex; align-items: center; gap: 12px; }
-    .top-bar-left img.logo { height: 40px; }
-    .bank-name { font-size: 1.15rem; font-weight: 700; }
-    .user-info { font-size: 0.85rem; color: #94a3b8; }
+    #dashboardPage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.78);
+      z-index: 0;
+    }
+    .dashboard-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 18px 50px;
+    }
+
+    .top-bar {
+      background: rgba(15,23,42,0.88); border: 1px solid rgba(148,163,184,0.2);
+      padding: 0.65rem 1.1rem; border-radius: 12px; display: flex;
+      justify-content: space-between; align-items: center; margin-bottom: 1.2rem;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 10px; }
+    .top-bar-left img.logo { height: 36px; }
+    .bank-name { font-size: 1.05rem; font-weight: 700; }
+    .user-info { font-size: 0.8rem; color: #94a3b8; }
 
     .hamburger {
-      width: 28px; height: 22px; display: flex; flex-direction: column;
-      justify-content: space-between; cursor: pointer; z-index: 20;
+      width: 26px; height: 20px; display: flex; flex-direction: column;
+      justify-content: space-between; cursor: pointer;
     }
-    .hamburger span {
-      display: block; height: 3px; background: #e2e8f0; border-radius: 2px;
-    }
+    .hamburger span { display: block; height: 2.5px; background: #e2e8f0; border-radius: 2px; }
+
     .menu-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 30; display: none;
     }
     .side-menu {
-      position: fixed; top: 0; right: -280px; width: 260px; height: 100%;
+      position: fixed; top: 0; right: -280px; width: 250px; height: 100%;
       background: #0f172a; border-left: 1px solid rgba(148,163,184,0.2);
-      z-index: 40; transition: right 0.3s ease; padding: 25px 20px;
+      z-index: 40; transition: right 0.3s ease; padding: 20px;
     }
     .side-menu.open { right: 0; }
-    .side-menu h3 { font-size: 1rem; margin-bottom: 20px; color: #94a3b8; }
+    .side-menu .menu-title {
+      display: inline-block;
+      background: #ffffff;
+      color: #0f172a;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+    }
     .side-menu button {
       display: block; width: 100%; text-align: left; background: none; border: none;
-      color: #e2e8f0; padding: 12px 10px; font-size: 1rem; cursor: pointer;
-      border-radius: 8px; margin-bottom: 4px;
+      color: #e2e8f0; padding: 11px 10px; font-size: 0.95rem; cursor: pointer;
+      border-radius: 8px; margin-bottom: 3px;
     }
     .side-menu button:hover { background: rgba(56,189,248,0.15); }
 
     .section { display: none; }
     .section.active { display: block; }
 
-    .balance-card {
-      background: linear-gradient(135deg, rgba(14,165,233,0.25), rgba(37,99,235,0.15));
-      border: 1px solid rgba(56,189,248,0.3); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.3rem;
+    /* Profile picture first, then balance */
+    .dash-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 1.1rem;
+      background: rgba(15,23,42,0.75);
+      border: 1px solid rgba(148,163,184,0.18);
+      padding: 14px 16px;
+      border-radius: 14px;
     }
-    .balance-label { font-size: 0.95rem; color: #bae6fd; }
-    .balance-amount { font-size: 2.3rem; font-weight: 700; margin-top: 0.2rem; }
-    .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.3rem; }
+    .dash-profile-pic {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2.5px solid rgba(56,189,248,0.55);
+    }
+    .dash-welcome { font-size: 1.05rem; font-weight: 600; }
+    .dash-sub { font-size: 0.8rem; color: #94a3b8; margin-top: 2px; }
+
+    .balance-card {
+      background: linear-gradient(135deg, rgba(14,165,233,0.22), rgba(37,99,235,0.12));
+      border: 1px solid rgba(56,189,248,0.28); padding: 1.15rem 1.3rem;
+      border-radius: 14px; margin-bottom: 1.1rem;
+    }
+    .balance-label { font-size: 0.88rem; color: #bae6fd; }
+    .balance-amount { font-size: 1.9rem; font-weight: 700; margin-top: 0.15rem; }
+    .balance-note { font-size: 0.75rem; color: #7dd3fc; margin-top: 0.25rem; }
 
     .features {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.8rem; margin-bottom: 1.3rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+      gap: 0.7rem; margin-bottom: 1.1rem;
     }
     .feature-btn {
-      background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
-      padding: 1rem 0.6rem; border-radius: 12px; text-align: center; cursor: pointer;
+      background: rgba(15,23,42,0.8); border: 1px solid rgba(148,163,184,0.2);
+      padding: 0.85rem 0.5rem; border-radius: 11px; text-align: center; cursor: pointer;
     }
     .feature-btn:hover { border-color: #38bdf8; }
-    .feature-btn .icon { font-size: 1.4rem; margin-bottom: 0.25rem; }
+    .feature-btn .icon { font-size: 1.25rem; margin-bottom: 0.2rem; }
+    .feature-btn .label { font-size: 0.8rem; }
 
     .card {
-      background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
-      border-radius: 14px; padding: 1.2rem; margin-bottom: 1.2rem;
+      background: rgba(15,23,42,0.82); border: 1px solid rgba(148,163,184,0.2);
+      border-radius: 13px; padding: 1.05rem; margin-bottom: 1.05rem;
     }
-    .card h3 { font-size: 1rem; color: #94a3b8; margin-bottom: 0.9rem; }
+    .card h3 { font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.8rem; }
 
     #transferPanel, #billsPanel, #depositPanel, #statementsPanel { display: none; }
-    .panel-title { font-size: 1.1rem; color: #38bdf8; margin-bottom: 1rem; font-weight: 600; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .panel-title { font-size: 1.05rem; color: #38bdf8; margin-bottom: 0.9rem; font-weight: 600; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
     @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     .full-btn {
       background: rgba(51,65,85,0.85); border: 1px solid rgba(148,163,184,0.25);
-      color: #e2e8f0; width: 100%; padding: 0.65rem; border-radius: 8px;
-      margin-bottom: 0.7rem; cursor: pointer;
+      color: #e2e8f0; width: 100%; padding: 0.6rem; border-radius: 8px;
+      margin-bottom: 0.65rem; cursor: pointer; font-size: 0.9rem;
     }
     .pending-box {
       background: rgba(120,53,15,0.4); border: 1px solid rgba(251,191,36,0.4);
-      color: #fde68a; padding: 0.9rem; border-radius: 8px; text-align: center;
-      margin-top: 0.9rem; display: none;
+      color: #fde68a; padding: 0.8rem; border-radius: 8px; text-align: center;
+      margin-top: 0.8rem; display: none; font-size: 0.88rem;
     }
 
     .tx {
-      display: flex; justify-content: space-between; padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(51,65,85,0.55);
+      display: flex; justify-content: space-between; padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 0.9rem;
     }
     .tx:last-child { border-bottom: none; }
     .tx-name { font-weight: 500; }
-    .tx-date { font-size: 0.8rem; color: #64748b; }
+    .tx-date { font-size: 0.75rem; color: #64748b; }
     .in { color: #4ade80; font-weight: 600; }
     .out { color: #f87171; font-weight: 600; }
     .pending { color: #fbbf24; font-weight: 600; }
 
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
-      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white;
+      border-radius: 13px; padding: 1.15rem; margin-bottom: 0.9rem; color: white;
     }
     .card-item.debit { background: linear-gradient(135deg, #334155, #1e293b); }
-    .card-type { font-size: 0.85rem; opacity: 0.85; }
-    .card-name { font-size: 0.95rem; margin: 0.4rem 0; }
-    .card-number { font-size: 1.2rem; letter-spacing: 2px; margin: 0.6rem 0; font-family: monospace; }
-    .card-footer { display: flex; justify-content: space-between; font-size: 0.9rem; }
-    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .card-type { font-size: 0.8rem; opacity: 0.85; }
+    .card-name { font-size: 0.9rem; margin: 0.35rem 0; }
+    .card-number { font-size: 1.1rem; letter-spacing: 2px; margin: 0.5rem 0; font-family: monospace; }
+    .card-footer { display: flex; justify-content: space-between; font-size: 0.85rem; }
+    .card-actions { display: flex; gap: 0.45rem; margin-top: 0.8rem; flex-wrap: wrap; }
     .card-actions button {
-      padding: 0.35rem 0.7rem; border-radius: 6px; border: none; cursor: pointer;
-      font-size: 0.8rem; background: rgba(255,255,255,0.15); color: white;
+      padding: 0.3rem 0.65rem; border-radius: 6px; border: none; cursor: pointer;
+      font-size: 0.78rem; background: rgba(255,255,255,0.15); color: white;
     }
     .full-details {
-      background: rgba(0,0,0,0.35); padding: 0.8rem; border-radius: 8px;
-      margin-top: 0.8rem; font-size: 0.9rem; display: none;
+      background: rgba(0,0,0,0.35); padding: 0.7rem; border-radius: 8px;
+      margin-top: 0.7rem; font-size: 0.85rem; display: none;
     }
     .success-msg {
-      background: rgba(22,101,52,0.4); color: #86efac; padding: 0.7rem;
-      border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none;
+      background: rgba(22,101,52,0.4); color: #86efac; padding: 0.6rem;
+      border-radius: 8px; text-align: center; margin-top: 0.6rem; display: none; font-size: 0.85rem;
     }
 
     .profile-header {
-      display: flex; align-items: center; gap: 18px; margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 16px; margin-bottom: 1.2rem;
     }
     .profile-pic {
-      width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
-      border: 3px solid rgba(56,189,248,0.5);
+      width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+      border: 2.5px solid rgba(56,189,248,0.5);
     }
     .profile-row {
-      display: flex; justify-content: space-between; padding: 0.7rem 0;
-      border-bottom: 1px solid rgba(51,65,85,0.55); font-size: 0.95rem;
+      display: flex; justify-content: space-between; padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 0.9rem;
     }
     .profile-row:last-child { border-bottom: none; }
     .profile-label { color: #94a3b8; }
     .clickable { color: #38bdf8; cursor: pointer; text-decoration: underline; }
+
+    .biometric-box {
+      margin-top: 1.1rem;
+      padding: 0.9rem;
+      background: rgba(14,165,233,0.12);
+      border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .biometric-box button {
+      margin-top: 8px;
+      padding: 0.5rem 1.1rem;
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
   </style>
 </head>
 <body>
@@ -292,207 +362,229 @@
 
   <!-- DASHBOARD -->
   <div id="dashboardPage">
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <img src="logo.jpg" class="logo" alt="Logo">
-        <div>
-          <div class="bank-name">Bank of Trusts</div>
-          <div class="user-info">Welcome, Wanda Agundez</div>
-        </div>
-      </div>
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-    <div class="side-menu" id="sideMenu">
-      <h3>Menu</h3>
-      <button onclick="showSection('home'); closeMenu()">Dashboard</button>
-      <button onclick="showSection('cards'); closeMenu()">Credit Cards</button>
-      <button onclick="showSection('profile'); closeMenu()">Profile</button>
-      <button onclick="logout(); closeMenu()">Log Out</button>
-    </div>
-
-    <!-- HOME -->
-    <div id="section-home" class="section active">
-      <div class="balance-card">
-        <div class="balance-label">Available Balance</div>
-        <div class="balance-amount">$1,750,000.00</div>
-        <div class="balance-note">Demo account • For learning purposes only</div>
-      </div>
-
-      <div class="features">
-        <div class="feature-btn" onclick="showPanel('transfer')"><div class="icon">↗️</div><div class="label">Transfer</div></div>
-        <div class="feature-btn" onclick="showPanel('bills')"><div class="icon">💡</div><div class="label">Pay Bills</div></div>
-        <div class="feature-btn" onclick="showPanel('deposit')"><div class="icon">📱</div><div class="label">Mobile Deposit</div></div>
-        <div class="feature-btn" onclick="showSection('cards')"><div class="icon">💳</div><div class="label">Cards</div></div>
-        <div class="feature-btn" onclick="showPanel('statements')"><div class="icon">📄</div><div class="label">Statements</div></div>
-        <div class="feature-btn" onclick="showSection('profile')"><div class="icon">👤</div><div class="label">Profile</div></div>
-      </div>
-
-      <!-- Transfer -->
-      <div class="card" id="transferPanel">
-        <div class="panel-title">Transfer Funds (Demo)</div>
-        <label>Choose Bank</label>
-        <select id="bankSelect">
-          <option value="">-- Select a bank --</option>
-          <option>Chase Bank</option><option>Bank of America</option><option>Wells Fargo</option>
-          <option>Citibank</option><option>U.S. Bank</option><option>PNC Bank</option>
-          <option>Capital One</option><option>TD Bank</option><option>Truist Bank</option><option>Other Bank</option>
-        </select>
-        <div class="form-row">
-          <div><label>Account Number</label><input type="text" id="accountNumber" placeholder="Account number"></div>
-          <div><label>Routing Number</label><input type="text" id="routingNumber" placeholder="Routing number"></div>
-        </div>
-        <label>Amount ($)</label>
-        <input type="number" id="transferAmount" placeholder="0.00" min="0" step="0.01">
-        <button class="full-btn" onclick="document.getElementById('transferAmount').value='1750000.00'">Use Full Balance</button>
-        <button class="primary" onclick="completeTransfer()">Complete Transfer</button>
-        <div id="transferPending" class="pending-box">⏳ Pending – Transfer submitted for approval (Demo)</div>
-      </div>
-
-      <!-- Pay Bills -->
-      <div class="card" id="billsPanel">
-        <div class="panel-title">Pay Bills (Demo)</div>
-        <label>Select Bill</label>
-        <select id="billSelect">
-          <option value="">-- Choose a bill --</option>
-          <option>Electric / Power Company</option>
-          <option>Water Utility</option>
-          <option>Gas Company</option>
-          <option>Internet / Cable</option>
-          <option>Phone / Mobile</option>
-          <option>Credit Card Payment</option>
-          <option>Mortgage / Rent</option>
-          <option>Car Loan / Auto Finance</option>
-          <option>Student Loan</option>
-          <option>Insurance (Auto / Home / Health)</option>
-          <option>IRS / Tax Payment</option>
-          <option>Trash / Waste Services</option>
-          <option>Other</option>
-        </select>
-        <label>Account / Reference Number</label>
-        <input type="text" id="billAccount" placeholder="Bill account number">
-        <label>Amount ($)</label>
-        <input type="number" id="billAmount" placeholder="0.00" min="0" step="0.01">
-        <button class="primary" onclick="payBill()">Send Payment</button>
-        <div id="billPending" class="pending-box">⏳ Pending – Bill payment submitted (Demo)</div>
-      </div>
-
-      <!-- Mobile Deposit -->
-      <div class="card" id="depositPanel">
-        <div class="panel-title">Mobile Deposit (Demo)</div>
-        <p style="font-size:0.9rem;color:#94a3b8;margin-bottom:12px;">Step 1: Take or upload a photo of the check</p>
-        <input type="file" id="checkPhoto" accept="image/*" capture="environment" style="margin-bottom:12px;">
-        <label>Check Amount ($)</label>
-        <input type="number" id="checkAmount" placeholder="0.00" min="0" step="0.01">
-        <button class="primary" onclick="depositCheck()">Deposit Check</button>
-        <div id="depositPending" class="pending-box">⏳ Pending – Check deposit submitted for review (Demo)</div>
-      </div>
-
-      <!-- Statements -->
-      <div class="card" id="statementsPanel">
-        <div class="panel-title">Account Statements (Demo)</div>
-        <p style="margin-bottom:12px;font-size:0.9rem;color:#94a3b8;">View recent activity or request a PDF statement.</p>
-        <button class="primary" style="margin-bottom:10px;" onclick="viewStatement()">View Statement on Page</button>
-        <button class="full-btn" onclick="printPDF()">Print / Download PDF</button>
-        <div id="statementPending" class="pending-box">⏳ Pending – PDF statement request received (Demo)</div>
-        <div id="statementView" style="display:none;margin-top:15px;font-size:0.9rem;"></div>
-      </div>
-
-      <div class="card">
-        <h3>Recent Account Activity</h3>
-        <div id="transactionList"></div>
-      </div>
-    </div>
-
-    <!-- CARDS -->
-    <div id="section-cards" class="section">
-      <div class="card">
-        <h3>Your Cards (Demo)</h3>
-
-        <div class="card-item">
-          <div class="card-type">Visa Platinum • Credit</div>
-          <div class="card-name">Wanda Agundez</div>
-          <div class="card-number">•••• •••• •••• 4821</div>
-          <div class="card-footer">
-            <span>Exp 08/28</span>
-            <span>CVV •••</span>
-          </div>
-          <div class="card-actions">
-            <button onclick="toggleFullCard('credit')">View</button>
-            <button onclick="changePIN('credit')">Change PIN</button>
-          </div>
-          <div class="full-details" id="creditFull">
-            <strong>Full Card Number (Demo):</strong> 4111 1111 1111 4821<br>
-            <strong>Expiry:</strong> 08/28<br>
-            <strong>CVV:</strong> 123<br>
-            <em>These are fake demo numbers only.</em>
-          </div>
-          <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
-        </div>
-
-        <div class="card-item debit">
-          <div class="card-type">Mastercard Debit</div>
-          <div class="card-name">Wanda Agundez</div>
-          <div class="card-number">•••• •••• •••• 7394</div>
-          <div class="card-footer">
-            <span>Exp 11/27</span>
-            <span>CVV •••</span>
-          </div>
-          <div class="card-actions">
-            <button onclick="toggleFullCard('debit')">View</button>
-            <button onclick="changePIN('debit')">Change PIN</button>
-          </div>
-          <div class="full-details" id="debitFull">
-            <strong>Full Card Number (Demo):</strong> 5555 5555 5555 7394<br>
-            <strong>Expiry:</strong> 11/27<br>
-            <strong>CVV:</strong> 456<br>
-            <em>These are fake demo numbers only.</em>
-          </div>
-          <div id="debitPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROFILE -->
-    <div id="section-profile" class="section">
-      <div class="card">
-        <div class="profile-header">
-          <img src="profile.jpg" alt="Profile" class="profile-pic" onerror="this.src='logo.jpg'">
+    <div class="dashboard-inner">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <img src="logo.jpg" class="logo" alt="Logo">
           <div>
-            <div style="font-size:1.25rem;font-weight:700;">Wanda Agundez</div>
-            <div style="color:#94a3b8;font-size:0.9rem;">Primary Account Holder</div>
+            <div class="bank-name">Bank of Trusts</div>
+            <div class="user-info">Welcome, Wanda Agundez</div>
+          </div>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      <div class="side-menu" id="sideMenu">
+        <div class="menu-title">Menu</div>
+        <button onclick="showSection('home'); closeMenu()">Dashboard</button>
+        <button onclick="showSection('cards'); closeMenu()">Credit Cards</button>
+        <button onclick="showSection('profile'); closeMenu()">Profile</button>
+        <button onclick="logout(); closeMenu()">Log Out</button>
+      </div>
+
+      <!-- HOME -->
+      <div id="section-home" class="section active">
+        <!-- Profile picture first -->
+        <div class="dash-header">
+          <img src="dashboard-bg.jpg" alt="Profile" class="dash-profile-pic" onerror="this.src='profile.jpg'">
+          <div>
+            <div class="dash-welcome">Wanda Agundez</div>
+            <div class="dash-sub">Primary Account Holder • Active</div>
           </div>
         </div>
 
-        <div class="profile-row">
-          <span class="profile-label">Full Name</span>
-          <span>Wanda Agundez</span>
+        <!-- Then balance -->
+        <div class="balance-card">
+          <div class="balance-label">Available Balance</div>
+          <div class="balance-amount">$1,750,000.00</div>
+          <div class="balance-note">Demo account • For learning purposes only</div>
         </div>
-        <div class="profile-row">
-          <span class="profile-label">Email</span>
-          <span>dwagundez@gmail.com</span>
+
+        <div class="features">
+          <div class="feature-btn" onclick="showPanel('transfer')"><div class="icon">↗️</div><div class="label">Transfer</div></div>
+          <div class="feature-btn" onclick="showPanel('bills')"><div class="icon">💡</div><div class="label">Pay Bills</div></div>
+          <div class="feature-btn" onclick="showPanel('deposit')"><div class="icon">📱</div><div class="label">Mobile Deposit</div></div>
+          <div class="feature-btn" onclick="showSection('cards')"><div class="icon">💳</div><div class="label">Cards</div></div>
+          <div class="feature-btn" onclick="showPanel('statements')"><div class="icon">📄</div><div class="label">Statements</div></div>
+          <div class="feature-btn" onclick="showSection('profile')"><div class="icon">👤</div><div class="label">Profile</div></div>
         </div>
-        <div class="profile-row">
-          <span class="profile-label">Account Number</span>
-          <span class="clickable" onclick="showFullAccount()">•••• 4821 (click to view)</span>
+
+        <!-- Transfer -->
+        <div class="card" id="transferPanel">
+          <div class="panel-title">Transfer Funds (Demo)</div>
+          <label>Choose Bank</label>
+          <select id="bankSelect">
+            <option value="">-- Select a bank --</option>
+            <option>Chase Bank</option><option>Bank of America</option><option>Wells Fargo</option>
+            <option>Citibank</option><option>U.S. Bank</option><option>PNC Bank</option>
+            <option>Capital One</option><option>TD Bank</option><option>Truist Bank</option><option>Other Bank</option>
+          </select>
+          <div class="form-row">
+            <div><label>Account Number</label><input type="text" id="accountNumber" placeholder="Account number"></div>
+            <div><label>Routing Number</label><input type="text" id="routingNumber" placeholder="Routing number"></div>
+          </div>
+          <label>Amount ($)</label>
+          <input type="number" id="transferAmount" placeholder="0.00" min="0" step="0.01">
+          <button class="full-btn" onclick="document.getElementById('transferAmount').value='1750000.00'">Use Full Balance</button>
+          <button class="primary" onclick="completeTransfer()">Complete Transfer</button>
+          <div id="transferPending" class="pending-box">⏳ Pending – Transfer submitted for approval (Demo)</div>
         </div>
-        <div class="profile-row" id="fullAccountRow" style="display:none;">
-          <span class="profile-label">Full Account Number</span>
-          <span>12345678904821 (Demo)</span>
+
+        <!-- Pay Bills -->
+        <div class="card" id="billsPanel">
+          <div class="panel-title">Pay Bills (Demo)</div>
+          <label>Select Bill</label>
+          <select id="billSelect">
+            <option value="">-- Choose a bill --</option>
+            <option>Electric / Power Company</option>
+            <option>Water Utility</option>
+            <option>Gas Company</option>
+            <option>Internet / Cable</option>
+            <option>Phone / Mobile</option>
+            <option>Credit Card Payment</option>
+            <option>Mortgage / Rent</option>
+            <option>Car Loan / Auto Finance</option>
+            <option>Student Loan</option>
+            <option>Insurance (Auto / Home / Health)</option>
+            <option>IRS / Tax Payment</option>
+            <option>Trash / Waste Services</option>
+            <option>Other</option>
+          </select>
+          <label>Account / Reference Number</label>
+          <input type="text" id="billAccount" placeholder="Bill account number">
+          <label>Amount ($)</label>
+          <input type="number" id="billAmount" placeholder="0.00" min="0" step="0.01">
+          <button class="primary" onclick="payBill()">Send Payment</button>
+          <div id="billPending" class="pending-box">⏳ Pending – Bill payment submitted (Demo)</div>
         </div>
-        <div class="profile-row">
-          <span class="profile-label">Status</span>
-          <span style="color:#4ade80;">Active</span>
+
+        <!-- Mobile Deposit -->
+        <div class="card" id="depositPanel">
+          <div class="panel-title">Mobile Deposit (Demo)</div>
+          <p style="font-size:0.85rem;color:#94a3b8;margin-bottom:10px;">Step 1: Take or upload a photo of the check</p>
+          <input type="file" id="checkPhoto" accept="image/*" capture="environment" style="margin-bottom:10px;">
+          <label>Check Amount ($)</label>
+          <input type="number" id="checkAmount" placeholder="0.00" min="0" step="0.01">
+          <button class="primary" onclick="depositCheck()">Deposit Check</button>
+          <div id="depositPending" class="pending-box">⏳ Pending – Check deposit submitted for review (Demo)</div>
+        </div>
+
+        <!-- Statements -->
+        <div class="card" id="statementsPanel">
+          <div class="panel-title">Account Statements (Demo)</div>
+          <p style="margin-bottom:10px;font-size:0.85rem;color:#94a3b8;">View recent activity or request a PDF statement.</p>
+          <button class="primary" style="margin-bottom:8px;" onclick="viewStatement()">View Statement on Page</button>
+          <button class="full-btn" onclick="printPDF()">Print / Download PDF</button>
+          <div id="statementPending" class="pending-box">⏳ Pending – PDF statement request received (Demo)</div>
+          <div id="statementView" style="display:none;margin-top:12px;font-size:0.85rem;"></div>
+        </div>
+
+        <div class="card">
+          <h3>Recent Account Activity</h3>
+          <div id="transactionList"></div>
+        </div>
+      </div>
+
+      <!-- CARDS -->
+      <div id="section-cards" class="section">
+        <div class="card">
+          <h3>Your Cards (Demo)</h3>
+
+          <div class="card-item">
+            <div class="card-type">Visa Platinum • Credit</div>
+            <div class="card-name">Wanda Agundez</div>
+            <div class="card-number">•••• •••• •••• 4821</div>
+            <div class="card-footer">
+              <span>Exp 08/28</span>
+              <span>CVV •••</span>
+            </div>
+            <div class="card-actions">
+              <button onclick="toggleFullCard('credit')">View</button>
+              <button onclick="changePIN('credit')">Change PIN</button>
+            </div>
+            <div class="full-details" id="creditFull">
+              <strong>Full Card Number (Demo):</strong> 4111 1111 1111 4821<br>
+              <strong>Expiry:</strong> 08/28<br>
+              <strong>CVV:</strong> 123<br>
+              <em>These are fake demo numbers only.</em>
+            </div>
+            <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
+          </div>
+
+          <div class="card-item debit">
+            <div class="card-type">Mastercard Debit</div>
+            <div class="card-name">Wanda Agundez</div>
+            <div class="card-number">•••• •••• •••• 7394</div>
+            <div class="card-footer">
+              <span>Exp 11/27</span>
+              <span>CVV •••</span>
+            </div>
+            <div class="card-actions">
+              <button onclick="toggleFullCard('debit')">View</button>
+              <button onclick="changePIN('debit')">Change PIN</button>
+            </div>
+            <div class="full-details" id="debitFull">
+              <strong>Full Card Number (Demo):</strong> 5555 5555 5555 7394<br>
+              <strong>Expiry:</strong> 11/27<br>
+              <strong>CVV:</strong> 456<br>
+              <em>These are fake demo numbers only.</em>
+            </div>
+            <div id="debitPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div id="section-profile" class="section">
+        <div class="card">
+          <div class="profile-header">
+            <img src="dashboard-bg.jpg" alt="Profile" class="profile-pic" onerror="this.src='profile.jpg'">
+            <div>
+              <div style="font-size:1.15rem;font-weight:700;">Wanda Agundez</div>
+              <div style="color:#94a3b8;font-size:0.85rem;">Primary Account Holder</div>
+            </div>
+          </div>
+
+          <div class="profile-row">
+            <span class="profile-label">Full Name</span>
+            <span>Wanda Agundez</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Email</span>
+            <span>dwagundez@gmail.com</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Phone</span>
+            <span>+1 775-230-6369</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Account Number</span>
+            <span class="clickable" onclick="showFullAccount()">•••• 0748 (click to view)</span>
+          </div>
+          <div class="profile-row" id="fullAccountRow" style="display:none;">
+            <span class="profile-label">Full Account Number</span>
+            <span>4326060748 (Demo)</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Status</span>
+            <span style="color:#4ade80;">Active</span>
+          </div>
+
+          <div class="biometric-box">
+            <div style="font-size:0.9rem;margin-bottom:4px;">Biometric Login</div>
+            <div style="font-size:0.8rem;color:#94a3b8;">Enable fingerprint or face recognition (Demo)</div>
+            <button onclick="enableBiometric()">Enable Biometric</button>
+            <div id="bioMsg" class="success-msg" style="margin-top:10px;">Biometric login enabled successfully (Demo)</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // ===== Keep user logged in after refresh =====
     function checkLoginState() {
       if (sessionStorage.getItem("isLoggedIn") === "true") {
         document.getElementById("loginPage").style.display = "none";
@@ -501,11 +593,8 @@
       }
     }
 
-    // Run on page load
     window.addEventListener("DOMContentLoaded", function() {
       checkLoginState();
-
-      // Remember username
       const saved = localStorage.getItem("rememberedUser");
       if (saved) {
         document.getElementById("username").value = saved;
@@ -513,7 +602,6 @@
       }
     });
 
-    // Eye toggle
     document.getElementById("togglePassword").addEventListener("click", function() {
       const input = document.getElementById("password");
       if (input.type === "password") {
@@ -556,7 +644,6 @@
       });
     }
 
-    // Login Step 1
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       if (isLocked) return;
@@ -577,15 +664,12 @@
       }
     });
 
-    // Login Step 2 - Approval Code
     function checkApprovalCode() {
       if (isLocked) return;
       const code = document.getElementById("approvalCode").value.trim();
       const codeError = document.getElementById("codeError");
       if (code === VALID_CODE) {
-        // Save login state so refresh does not kick the user out
         sessionStorage.setItem("isLoggedIn", "true");
-
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
         renderTransactions();
@@ -604,9 +688,7 @@
     }
 
     function logout() {
-      // Clear login state
       sessionStorage.removeItem("isLoggedIn");
-
       document.getElementById("dashboardPage").style.display = "none";
       document.getElementById("loginPage").style.display = "flex";
       document.getElementById("loginStep").style.display = "block";
@@ -633,7 +715,6 @@
       }
     }
 
-    // Menu
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("open");
       document.getElementById("menuOverlay").style.display =
@@ -723,6 +804,11 @@
 
     function showFullAccount() {
       document.getElementById("fullAccountRow").style.display = "flex";
+    }
+
+    function enableBiometric() {
+      document.getElementById("bioMsg").style.display = "block";
+      setTimeout(() => document.getElementById("bioMsg").style.display = "none", 3000);
     }
 
     renderTransactions();
