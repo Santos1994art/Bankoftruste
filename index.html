@@ -133,6 +133,27 @@
       font-size: 0.93rem;
     }
     input:focus { outline: none; border-color: #38bdf8; }
+
+    /* Password with eye icon */
+    .password-wrapper {
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+    .password-wrapper input {
+      padding-right: 42px;
+      margin-bottom: 0;
+    }
+    #togglePassword {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 1.15rem;
+      color: #94a3b8;
+      user-select: none;
+    }
+
     button.primary {
       width: 100%;
       padding: 0.68rem;
@@ -162,7 +183,6 @@
     }
     .create-account span { color: #38bdf8; cursor: default; }
 
-    /* Approval code section */
     #approvalSection { display: none; }
     .locked-msg {
       background: rgba(127, 29, 29, 0.55);
@@ -215,7 +235,7 @@
       .main-headline h1, .sub-headline { text-align: center; }
     }
 
-    /* DASHBOARD styles kept short for space */
+    /* DASHBOARD */
     #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px; }
     .top-bar {
       background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.2);
@@ -227,7 +247,7 @@
     .bank-name { font-size: 1.15rem; font-weight: 700; }
     .user-info { font-size: 0.85rem; color: #94a3b8; }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-btn, .logout-btn, .theme-btn {
+    .nav-btn, .logout-btn {
       padding: 0.4rem 0.85rem; background: rgba(51,65,85,0.7);
       border: 1px solid rgba(148,163,184,0.25); color: #e2e8f0;
       border-radius: 8px; cursor: pointer; font-size: 0.85rem;
@@ -335,22 +355,13 @@
             <form id="loginForm">
               <label>Username / Account Number</label>
               <input type="text" id="username" placeholder="Enter username" required>
+
               <label>Password</label>
-<div style="position: relative;">
-  <input type="password" id="password" placeholder="Enter password" required style="padding-right: 42px;">
-  <button type="button" id="togglePassword" style="
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #94a3b8;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 4px 6px;
-  ">Show</button>
-</div>
+              <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Enter password" required>
+                <span id="togglePassword">👁️</span>
+              </div>
+
               <button type="submit" class="primary">Sign In</button>
             </form>
             <div id="loginError" class="error-msg"></div>
@@ -498,17 +509,19 @@
     </div>
   </div>
 
-  <script>// Show / Hide password
-document.getElementById("togglePassword").addEventListener("click", function() {
-  const passwordInput = document.getElementById("password");
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-    this.textContent = "Hide";
-  } else {
-    passwordInput.type = "password";
-    this.textContent = "Show";
-  }
-});
+  <script>
+    // Show / Hide password with eye icon
+    document.getElementById("togglePassword").addEventListener("click", function() {
+      const passwordInput = document.getElementById("password");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.textContent = "🙈";
+      } else {
+        passwordInput.type = "password";
+        this.textContent = "👁️";
+      }
+    });
+
     const VALID_USER = "Wanda";
     const VALID_PASS = "Fussy27shadow!";
     const VALID_CODE = "909010";
@@ -551,7 +564,6 @@ document.getElementById("togglePassword").addEventListener("click", function() {
       const error = document.getElementById("loginError");
 
       if (user === VALID_USER && pass === VALID_PASS) {
-        // Show approval code step
         document.getElementById("loginStep").style.display = "none";
         document.getElementById("approvalSection").style.display = "block";
         error.style.display = "none";
@@ -569,7 +581,6 @@ document.getElementById("togglePassword").addEventListener("click", function() {
       const codeError = document.getElementById("codeError");
 
       if (code === VALID_CODE) {
-        // Success → go to dashboard
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
         renderTransactions();
