@@ -8,237 +8,86 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
 
+    /* ===== LOGIN ===== */
     #loginPage {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: url('background.jpg') center center / cover no-repeat;
-      position: relative;
+      min-height: 100vh; display: flex; flex-direction: column;
+      background: url('background.jpg') center center / cover no-repeat; position: relative;
     }
     #loginPage::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 22, 40, 0.55);
-      z-index: 0;
+      content: ''; position: absolute; inset: 0;
+      background: rgba(10, 22, 40, 0.55); z-index: 0;
     }
-
     .fdic-bar {
-      position: relative;
-      z-index: 2;
-      background: #ffffff;
-      color: #0f172a;
-      text-align: center;
-      padding: 9px 15px;
-      font-size: 0.82rem;
-      font-weight: 500;
+      position: relative; z-index: 2; background: #fff; color: #0f172a;
+      text-align: center; padding: 9px 15px; font-size: 0.82rem; font-weight: 500;
     }
-
     .login-content {
-      position: relative;
-      z-index: 1;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 30px 40px;
-      gap: 30px;
-      max-width: 1300px;
-      margin: 0 auto;
-      width: 100%;
+      position: relative; z-index: 1; flex: 1; display: flex; align-items: center;
+      justify-content: space-between; padding: 30px 40px; gap: 30px;
+      max-width: 1300px; margin: 0 auto; width: 100%;
     }
-
-    .left-features {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-width: 200px;
-    }
+    .left-features { display: flex; flex-direction: column; gap: 14px; min-width: 200px; }
     .left-feature {
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: #f1f5f9;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 13px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-      backdrop-filter: blur(6px);
+      background: rgba(15,23,42,0.5); border: 1px solid rgba(255,255,255,0.18);
+      color: #f1f5f9; font-weight: 700; font-size: 0.95rem; padding: 13px 20px;
+      border-radius: 10px; cursor: pointer; transition: 0.2s; backdrop-filter: blur(6px);
     }
     .left-feature:hover {
-      background: rgba(14, 165, 233, 0.25);
-      border-color: rgba(56, 189, 248, 0.5);
-      transform: translateX(4px);
+      background: rgba(14,165,233,0.25); border-color: rgba(56,189,248,0.5); transform: translateX(4px);
     }
-
-    .right-side {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      max-width: 380px;
-      width: 100%;
-    }
-
-    .main-headline h1 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #ffffff;
-      text-align: right;
-      line-height: 1.25;
-    }
-    .sub-headline {
-      text-align: right;
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      margin: 6px 0 18px;
-    }
-
+    .right-side { display: flex; flex-direction: column; align-items: flex-end; max-width: 380px; width: 100%; }
+    .main-headline h1 { font-size: 1.7rem; font-weight: 700; color: #fff; text-align: right; line-height: 1.25; }
+    .sub-headline { text-align: right; color: #cbd5e1; font-size: 0.95rem; margin: 6px 0 18px; }
     .login-card {
-      background: rgba(15, 23, 42, 0.58);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 1.35rem 1.4rem;
-      border-radius: 14px;
-      width: 100%;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      background: rgba(15,23,42,0.58); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.14); padding: 1.35rem 1.4rem;
+      border-radius: 14px; width: 100%; box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
     .login-logo { text-align: center; margin-bottom: 0.5rem; }
     .login-logo img { max-width: 155px; height: auto; }
     .demo-badge {
-      display: inline-block;
-      background: rgba(239, 68, 68, 0.22);
-      color: #fca5a5;
-      font-size: 0.66rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      margin-bottom: 0.9rem;
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      display: inline-block; background: rgba(239,68,68,0.22); color: #fca5a5;
+      font-size: 0.66rem; padding: 0.2rem 0.6rem; border-radius: 999px;
+      margin-bottom: 0.9rem; border: 1px solid rgba(239,68,68,0.3);
     }
-    label {
-      display: block;
-      margin-bottom: 0.22rem;
-      font-size: 0.82rem;
-      color: #94a3b8;
+    label { display: block; margin-bottom: 0.22rem; font-size: 0.82rem; color: #94a3b8; }
+    input[type="text"], input[type="password"], input[type="number"], select {
+      width: 100%; padding: 0.6rem 0.8rem; margin-bottom: 0.75rem;
+      border: 1px solid rgba(148,163,184,0.28); border-radius: 8px;
+      background: rgba(15,23,42,0.5); color: white; font-size: 0.93rem;
     }
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 0.75rem;
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      border-radius: 8px;
-      background: rgba(15, 23, 42, 0.5);
-      color: white;
-      font-size: 0.93rem;
-    }
-    input:focus { outline: none; border-color: #38bdf8; }
-
-    .password-wrapper {
-      position: relative;
-      margin-bottom: 0.75rem;
-    }
-    .password-wrapper input {
-      padding-right: 42px;
-      margin-bottom: 0;
-    }
+    input:focus, select:focus { outline: none; border-color: #38bdf8; }
+    .password-wrapper { position: relative; margin-bottom: 0.75rem; }
+    .password-wrapper input { padding-right: 42px; margin-bottom: 0; }
     #togglePassword {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 1.15rem;
-      color: #94a3b8;
-      user-select: none;
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      cursor: pointer; font-size: 1.15rem; color: #94a3b8; user-select: none;
     }
-
     .remember-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 0.9rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
+      display: flex; align-items: center; gap: 8px; margin-bottom: 0.9rem;
+      font-size: 0.85rem; color: #94a3b8;
     }
-    .remember-row input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
+    .remember-row input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
     button.primary {
-      width: 100%;
-      padding: 0.68rem;
-      background: linear-gradient(90deg, #0ea5e9, #2563eb);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
+      width: 100%; padding: 0.68rem; background: linear-gradient(90deg,#0ea5e9,#2563eb);
+      color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
     }
     .error-msg {
-      background: rgba(127, 29, 29, 0.5);
-      color: #fecaca;
-      padding: 0.6rem;
-      border-radius: 8px;
-      text-align: center;
-      margin-top: 0.7rem;
-      display: none;
-      font-size: 0.86rem;
+      background: rgba(127,29,29,0.5); color: #fecaca; padding: 0.6rem;
+      border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none; font-size: 0.86rem;
     }
-    .create-account {
-      text-align: center;
-      margin-top: 0.85rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-    }
+    .create-account { text-align: center; margin-top: 0.85rem; font-size: 0.85rem; color: #94a3b8; }
     .create-account span { color: #38bdf8; cursor: default; }
-
     #approvalSection { display: none; }
     .locked-msg {
-      background: rgba(127, 29, 29, 0.55);
-      color: #fecaca;
-      padding: 0.9rem;
-      border-radius: 8px;
-      text-align: center;
-      font-size: 0.9rem;
-      display: none;
+      background: rgba(127,29,29,0.55); color: #fecaca; padding: 0.9rem;
+      border-radius: 8px; text-align: center; font-size: 0.9rem; display: none;
     }
-
-    .login-bottom {
-      position: relative;
-      z-index: 1;
-      padding: 16px 20px 12px;
-      text-align: center;
-    }
-    .bottom-columns {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 45px;
-      margin-bottom: 12px;
-    }
-    .bottom-col h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 5px;
-    }
-    .bottom-col p {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      margin: 3px 0;
-      cursor: default;
-    }
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
+    .login-bottom { position: relative; z-index: 1; padding: 16px 20px 12px; text-align: center; }
+    .bottom-columns { display: flex; flex-wrap: wrap; justify-content: center; gap: 45px; margin-bottom: 12px; }
+    .bottom-col h4 { font-size: 0.88rem; font-weight: 700; color: #f1f5f9; margin-bottom: 5px; }
+    .bottom-col p { font-size: 0.82rem; color: #94a3b8; margin: 3px 0; cursor: default; }
+    .social-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; font-size: 1.2rem; }
     .footer-tiny { font-size: 0.68rem; color: #64748b; }
 
     @media (max-width: 900px) {
@@ -248,26 +97,46 @@
       .main-headline h1, .sub-headline { text-align: center; }
     }
 
-    /* DASHBOARD */
-    #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px; }
+    /* ===== DASHBOARD ===== */
+    #dashboardPage { display: none; max-width: 1100px; margin: 0 auto; padding: 20px 20px 60px; }
     .top-bar {
-      background: rgba(15,23,42,0.9); border: 1px solid rgba(148,163,184,0.2);
-      padding: 0.8rem 1.2rem; border-radius: 14px; display: flex;
-      justify-content: space-between; align-items: center; margin-bottom: 1.4rem; flex-wrap: wrap; gap: 10px;
+      background: rgba(15,23,42,0.92); border: 1px solid rgba(148,163,184,0.2);
+      padding: 0.75rem 1.2rem; border-radius: 14px; display: flex;
+      justify-content: space-between; align-items: center; margin-bottom: 1.4rem;
     }
     .top-bar-left { display: flex; align-items: center; gap: 12px; }
-    .top-bar-left img { height: 40px; }
+    .top-bar-left img.logo { height: 40px; }
     .bank-name { font-size: 1.15rem; font-weight: 700; }
     .user-info { font-size: 0.85rem; color: #94a3b8; }
-    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .nav-btn, .logout-btn {
-      padding: 0.4rem 0.85rem; background: rgba(51,65,85,0.7);
-      border: 1px solid rgba(148,163,184,0.25); color: #e2e8f0;
-      border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+
+    /* Hamburger */
+    .hamburger {
+      width: 28px; height: 22px; display: flex; flex-direction: column;
+      justify-content: space-between; cursor: pointer; z-index: 20;
     }
-    .nav-btn.active { background: #0ea5e9; color: white; }
+    .hamburger span {
+      display: block; height: 3px; background: #e2e8f0; border-radius: 2px; transition: 0.25s;
+    }
+    .menu-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 30; display: none;
+    }
+    .side-menu {
+      position: fixed; top: 0; right: -280px; width: 260px; height: 100%;
+      background: #0f172a; border-left: 1px solid rgba(148,163,184,0.2);
+      z-index: 40; transition: right 0.3s ease; padding: 25px 20px;
+    }
+    .side-menu.open { right: 0; }
+    .side-menu h3 { font-size: 1rem; margin-bottom: 20px; color: #94a3b8; }
+    .side-menu button {
+      display: block; width: 100%; text-align: left; background: none; border: none;
+      color: #e2e8f0; padding: 12px 10px; font-size: 1rem; cursor: pointer;
+      border-radius: 8px; margin-bottom: 4px;
+    }
+    .side-menu button:hover { background: rgba(56,189,248,0.15); }
+
     .section { display: none; }
     .section.active { display: block; }
+
     .balance-card {
       background: linear-gradient(135deg, rgba(14,165,233,0.25), rgba(37,99,235,0.15));
       border: 1px solid rgba(56,189,248,0.3); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.3rem;
@@ -275,6 +144,7 @@
     .balance-label { font-size: 0.95rem; color: #bae6fd; }
     .balance-amount { font-size: 2.3rem; font-weight: 700; margin-top: 0.2rem; }
     .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.3rem; }
+
     .features {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 0.8rem; margin-bottom: 1.3rem;
@@ -285,12 +155,14 @@
     }
     .feature-btn:hover { border-color: #38bdf8; }
     .feature-btn .icon { font-size: 1.4rem; margin-bottom: 0.25rem; }
+
     .card {
       background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
       border-radius: 14px; padding: 1.2rem; margin-bottom: 1.2rem;
     }
     .card h3 { font-size: 1rem; color: #94a3b8; margin-bottom: 0.9rem; }
-    #transferPanel { display: none; }
+
+    #transferPanel, #billsPanel, #depositPanel, #statementsPanel { display: none; }
     .panel-title { font-size: 1.1rem; color: #38bdf8; margin-bottom: 1rem; font-weight: 600; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
@@ -299,11 +171,12 @@
       color: #e2e8f0; width: 100%; padding: 0.65rem; border-radius: 8px;
       margin-bottom: 0.7rem; cursor: pointer;
     }
-    .waiting-box {
+    .waiting-box, .pending-box {
       background: rgba(120,53,15,0.4); border: 1px solid rgba(251,191,36,0.4);
       color: #fde68a; padding: 0.9rem; border-radius: 8px; text-align: center;
       margin-top: 0.9rem; display: none;
     }
+
     .tx {
       display: flex; justify-content: space-between; padding: 0.8rem 0;
       border-bottom: 1px solid rgba(51,65,85,0.55);
@@ -313,34 +186,55 @@
     .tx-date { font-size: 0.8rem; color: #64748b; }
     .in { color: #4ade80; font-weight: 600; }
     .out { color: #f87171; font-weight: 600; }
+    .pending { color: #fbbf24; font-weight: 600; }
+
+    /* Cards */
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
-      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white;
+      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white; position: relative;
     }
+    .card-item.debit { background: linear-gradient(135deg, #334155, #1e293b); }
     .card-type { font-size: 0.85rem; opacity: 0.85; }
-    .card-number { font-size: 1.2rem; letter-spacing: 2px; margin: 0.7rem 0; font-family: monospace; }
+    .card-name { font-size: 0.95rem; margin: 0.4rem 0; }
+    .card-number { font-size: 1.2rem; letter-spacing: 2px; margin: 0.6rem 0; font-family: monospace; }
     .card-footer { display: flex; justify-content: space-between; font-size: 0.9rem; }
-    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+    .card-actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
     .card-actions button {
       padding: 0.35rem 0.7rem; border-radius: 6px; border: none; cursor: pointer;
       font-size: 0.8rem; background: rgba(255,255,255,0.15); color: white;
     }
+    .full-details {
+      background: rgba(0,0,0,0.35); padding: 0.8rem; border-radius: 8px;
+      margin-top: 0.8rem; font-size: 0.9rem; display: none;
+    }
+
+    /* Profile */
+    .profile-header {
+      display: flex; align-items: center; gap: 18px; margin-bottom: 1.4rem;
+    }
+    .profile-pic {
+      width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+      border: 3px solid rgba(56,189,248,0.5);
+    }
     .profile-row {
-      display: flex; justify-content: space-between; padding: 0.65rem 0;
+      display: flex; justify-content: space-between; padding: 0.7rem 0;
       border-bottom: 1px solid rgba(51,65,85,0.55); font-size: 0.95rem;
     }
     .profile-row:last-child { border-bottom: none; }
     .profile-label { color: #94a3b8; }
+    .clickable { color: #38bdf8; cursor: pointer; text-decoration: underline; }
+
+    .success-msg {
+      background: rgba(22,101,52,0.4); color: #86efac; padding: 0.7rem;
+      border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- LOGIN PAGE -->
+  <!-- ========== LOGIN ========== -->
   <div id="loginPage">
-    <div class="fdic-bar">
-      FDIC FDIC-Insured - Backed by the full faith and credit of the Government
-    </div>
-
+    <div class="fdic-bar">FDIC FDIC-Insured - Backed by the full faith and credit of the Government</div>
     <div class="login-content">
       <div class="left-features">
         <div class="left-feature">Credit Cards</div>
@@ -348,102 +242,84 @@
         <div class="left-feature">Auto</div>
         <div class="left-feature">Business</div>
       </div>
-
       <div class="right-side">
-        <div class="main-headline">
-          <h1>Grow Your Money With Confidence</h1>
-        </div>
+        <div class="main-headline"><h1>Grow Your Money With Confidence</h1></div>
         <div class="sub-headline">- Your Future &nbsp;&nbsp; - Our Priority</div>
-
         <div class="login-card">
           <div class="login-logo">
-            <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 155px;">
+            <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width:155px;">
           </div>
-          <div style="text-align:center">
-            <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
-          </div>
+          <div style="text-align:center"><span class="demo-badge">EDUCATIONAL DEMO ONLY</span></div>
 
-          <!-- Step 1: Username & Password -->
           <div id="loginStep">
-            <form id="loginForm">
+            <form id="loginForm" autocomplete="on">
               <label>Username / Account Number</label>
-              <input type="text" id="username" placeholder="Enter username" required>
+              <input type="text" id="username" name="username" placeholder="Enter username" required autocomplete="username">
 
               <label>Password</label>
               <div class="password-wrapper">
-                <input type="password" id="password" placeholder="Enter password" required>
+                <input type="password" id="password" name="password" placeholder="Enter password" required autocomplete="current-password">
                 <span id="togglePassword">👁️</span>
               </div>
 
-              <!-- Remember me -->
               <div class="remember-row">
                 <input type="checkbox" id="rememberMe">
-                <label for="rememberMe" style="margin:0; cursor:pointer;">Remember my login</label>
+                <label for="rememberMe" style="margin:0;cursor:pointer;">Remember my login</label>
               </div>
-
               <button type="submit" class="primary">Sign In</button>
             </form>
             <div id="loginError" class="error-msg"></div>
-            <div class="create-account">
-              Don’t have an account? <span>Create account</span>
-            </div>
+            <div class="create-account">Don’t have an account? <span>Create account</span></div>
           </div>
 
-          <!-- Step 2: Approval Code -->
           <div id="approvalSection">
             <label>Approval code from bank management</label>
             <input type="text" id="approvalCode" placeholder="Enter 6-digit code" maxlength="6">
             <button class="primary" onclick="checkApprovalCode()">Verify Code</button>
             <div id="codeError" class="error-msg"></div>
             <div id="lockedMsg" class="locked-msg">
-              Account locked due to too many incorrect attempts.<br>
-              Please contact support (Demo only).
+              Account locked due to too many incorrect attempts.<br>Please contact support (Demo only).
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="login-bottom">
       <div class="bottom-columns">
-        <div class="bottom-col">
-          <h4>Products</h4>
-          <p>Credit Cards</p>
-          <p>Checking & Savings</p>
-        </div>
-        <div class="bottom-col">
-          <h4>Support</h4>
-          <p>Help Center</p>
-          <p>Security</p>
-        </div>
+        <div class="bottom-col"><h4>Products</h4><p>Credit Cards</p><p>Checking & Savings</p></div>
+        <div class="bottom-col"><h4>Support</h4><p>Help Center</p><p>Security</p></div>
       </div>
-      <div class="social-icons">
-        <span>📘</span><span>📷</span><span>🎵</span><span>𝕏</span>
-      </div>
-      <div class="footer-tiny">
-        © 2026 Capital Trusts Member FDIC. Equal Housing Lender
-      </div>
+      <div class="social-icons"><span>📘</span><span>📷</span><span>🎵</span><span>𝕏</span></div>
+      <div class="footer-tiny">© 2026 Capital Trusts Member FDIC. Equal Housing Lender</div>
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- ========== DASHBOARD ========== -->
   <div id="dashboardPage">
     <div class="top-bar">
       <div class="top-bar-left">
-        <img src="logo.jpg" alt="Logo" style="height: 40px;">
+        <img src="logo.jpg" class="logo" alt="Logo">
         <div>
           <div class="bank-name">Bank of Trusts</div>
-          <div class="user-info">Welcome, Wanda</div>
+          <div class="user-info">Welcome, Wanda Agundez</div>
         </div>
       </div>
-      <div class="nav-links">
-        <button class="nav-btn active" onclick="showSection('home')">Dashboard</button>
-        <button class="nav-btn" onclick="showSection('cards')">Cards</button>
-        <button class="nav-btn" onclick="showSection('profile')">Profile</button>
-        <button class="logout-btn" onclick="logout()">Log Out</button>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
       </div>
     </div>
 
+    <!-- Side Menu -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+      <h3>Menu</h3>
+      <button onclick="showSection('home'); closeMenu()">Dashboard</button>
+      <button onclick="showSection('cards'); closeMenu()">Credit Cards</button>
+      <button onclick="showSection('profile'); closeMenu()">Profile</button>
+      <button onclick="logout(); closeMenu()">Log Out</button>
+    </div>
+
+    <!-- HOME -->
     <div id="section-home" class="section active">
       <div class="balance-card">
         <div class="balance-label">Available Balance</div>
@@ -452,100 +328,193 @@
       </div>
 
       <div class="features">
-        <div class="feature-btn" onclick="showTransfer()"><div class="icon">↗️</div><div class="label">Transfer</div></div>
-        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">💡</div><div class="label">Pay Bills</div></div>
-        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">📱</div><div class="label">Mobile Deposit</div></div>
+        <div class="feature-btn" onclick="showPanel('transfer')"><div class="icon">↗️</div><div class="label">Transfer</div></div>
+        <div class="feature-btn" onclick="showPanel('bills')"><div class="icon">💡</div><div class="label">Pay Bills</div></div>
+        <div class="feature-btn" onclick="showPanel('deposit')"><div class="icon">📱</div><div class="label">Mobile Deposit</div></div>
         <div class="feature-btn" onclick="showSection('cards')"><div class="icon">💳</div><div class="label">Cards</div></div>
-        <div class="feature-btn" onclick="alert('Demo only')"><div class="icon">📄</div><div class="label">Statements</div></div>
+        <div class="feature-btn" onclick="showPanel('statements')"><div class="icon">📄</div><div class="label">Statements</div></div>
         <div class="feature-btn" onclick="showSection('profile')"><div class="icon">👤</div><div class="label">Profile</div></div>
       </div>
 
+      <!-- Transfer -->
       <div class="card" id="transferPanel">
         <div class="panel-title">Transfer Funds (Demo)</div>
-        <label>Choose Bank to Transfer To</label>
+        <label>Choose Bank</label>
         <select id="bankSelect">
           <option value="">-- Select a bank --</option>
-          <option>Chase Bank</option>
-          <option>Bank of America</option>
-          <option>Wells Fargo</option>
-          <option>Citibank</option>
-          <option>U.S. Bank</option>
-          <option>PNC Bank</option>
-          <option>Capital One</option>
-          <option>TD Bank</option>
-          <option>Truist Bank</option>
-          <option>Other Bank</option>
+          <option>Chase Bank</option><option>Bank of America</option><option>Wells Fargo</option>
+          <option>Citibank</option><option>U.S. Bank</option><option>PNC Bank</option>
+          <option>Capital One</option><option>TD Bank</option><option>Truist Bank</option><option>Other Bank</option>
         </select>
         <div class="form-row">
-          <div>
-            <label>Account Number</label>
-            <input type="text" id="accountNumber" placeholder="Account number">
-          </div>
-          <div>
-            <label>Routing Number</label>
-            <input type="text" id="routingNumber" placeholder="Routing number">
-          </div>
+          <div><label>Account Number</label><input type="text" id="accountNumber" placeholder="Account number"></div>
+          <div><label>Routing Number</label><input type="text" id="routingNumber" placeholder="Routing number"></div>
         </div>
         <label>Amount ($)</label>
         <input type="number" id="transferAmount" placeholder="0.00" min="0" step="0.01">
-        <button class="full-btn" onclick="useFullBalance()">Use Full Balance ($1,750,000.00)</button>
+        <button class="full-btn" onclick="document.getElementById('transferAmount').value='1750000.00'">Use Full Balance</button>
         <button class="primary" onclick="completeTransfer()">Complete Transfer</button>
-        <div id="waitingMsg" class="waiting-box">
-          ⏳ Waiting for approval...<br>
-          <small>This is a simulated message only.</small>
-        </div>
+        <div id="transferPending" class="pending-box">⏳ Pending – Transfer submitted for approval (Demo)</div>
       </div>
 
+      <!-- Pay Bills -->
+      <div class="card" id="billsPanel">
+        <div class="panel-title">Pay Bills (Demo)</div>
+        <label>Select Bill</label>
+        <select id="billSelect">
+          <option value="">-- Choose a bill --</option>
+          <option>Electric / Power Company</option>
+          <option>Water Utility</option>
+          <option>Gas Company</option>
+          <option>Internet / Cable</option>
+          <option>Phone / Mobile</option>
+          <option>Credit Card Payment</option>
+          <option>Mortgage / Rent</option>
+          <option>Car Loan / Auto Finance</option>
+          <option>Student Loan</option>
+          <option>Insurance (Auto / Home / Health)</option>
+          <option>IRS / Tax Payment</option>
+          <option>Trash / Waste Services</option>
+          <option>Other</option>
+        </select>
+        <label>Account / Reference Number</label>
+        <input type="text" id="billAccount" placeholder="Bill account number">
+        <label>Amount ($)</label>
+        <input type="number" id="billAmount" placeholder="0.00" min="0" step="0.01">
+        <button class="primary" onclick="payBill()">Send Payment</button>
+        <div id="billPending" class="pending-box">⏳ Pending – Bill payment submitted (Demo)</div>
+      </div>
+
+      <!-- Mobile Deposit -->
+      <div class="card" id="depositPanel">
+        <div class="panel-title">Mobile Deposit (Demo)</div>
+        <p style="font-size:0.9rem;color:#94a3b8;margin-bottom:12px;">Step 1: Take or upload a photo of the check</p>
+        <input type="file" id="checkPhoto" accept="image/*" capture="environment" style="margin-bottom:12px;">
+        <label>Check Amount ($)</label>
+        <input type="number" id="checkAmount" placeholder="0.00" min="0" step="0.01">
+        <button class="primary" onclick="depositCheck()">Deposit Check</button>
+        <div id="depositPending" class="pending-box">⏳ Pending – Check deposit submitted for review (Demo)</div>
+      </div>
+
+      <!-- Statements -->
+      <div class="card" id="statementsPanel">
+        <div class="panel-title">Account Statements (Demo)</div>
+        <p style="margin-bottom:12px;font-size:0.9rem;color:#94a3b8;">View recent activity or request a PDF statement.</p>
+        <button class="primary" style="margin-bottom:10px;" onclick="viewStatement()">View Statement on Page</button>
+        <button class="full-btn" onclick="printPDF()">Print / Download PDF</button>
+        <div id="statementPending" class="pending-box">⏳ Pending – PDF statement request received (Demo)</div>
+        <div id="statementView" style="display:none;margin-top:15px;font-size:0.9rem;"></div>
+      </div>
+
+      <!-- Transactions -->
       <div class="card">
         <h3>Recent Account Activity</h3>
         <div id="transactionList"></div>
       </div>
     </div>
 
+    <!-- CARDS -->
     <div id="section-cards" class="section">
       <div class="card">
-        <h3>Your Credit & Debit Cards (Demo)</h3>
+        <h3>Your Cards (Demo)</h3>
+
+        <!-- Credit Card -->
         <div class="card-item">
           <div class="card-type">Visa Platinum • Credit</div>
-          <div class="card-number">•••• •••• •••• 4821</div>
-          <div class="card-footer"><span>Wanda</span><span>Exp 08/28</span></div>
-          <div class="card-actions">
-            <button onclick="alert('Demo only')">Freeze Card</button>
-            <button onclick="alert('Demo only')">Change PIN</button>
+          <div class="card-name">Wanda Agundez</div>
+          <div class="card-number" id="creditNumDisplay">•••• •••• •••• 4821</div>
+          <div class="card-footer">
+            <span>Exp 08/28</span>
+            <span>CVV •••</span>
           </div>
+          <div class="card-actions">
+            <button onclick="toggleFullCard('credit')">View</button>
+            <button onclick="changePIN('credit')">Change PIN</button>
+          </div>
+          <div class="full-details" id="creditFull">
+            <strong>Full Card Number (Demo):</strong> 4111 1111 1111 4821<br>
+            <strong>Expiry:</strong> 08/28<br>
+            <strong>CVV:</strong> 123<br>
+            <em>These are fake demo numbers only.</em>
+          </div>
+          <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
+        </div>
+
+        <!-- Debit Card -->
+        <div class="card-item debit">
+          <div class="card-type">Mastercard Debit</div>
+          <div class="card-name">Wanda Agundez</div>
+          <div class="card-number" id="debitNumDisplay">•••• •••• •••• 7394</div>
+          <div class="card-footer">
+            <span>Exp 11/27</span>
+            <span>CVV •••</span>
+          </div>
+          <div class="card-actions">
+            <button onclick="toggleFullCard('debit')">View</button>
+            <button onclick="changePIN('debit')">Change PIN</button>
+          </div>
+          <div class="full-details" id="debitFull">
+            <strong>Full Card Number (Demo):</strong> 5555 5555 5555 7394<br>
+            <strong>Expiry:</strong> 11/27<br>
+            <strong>CVV:</strong> 456<br>
+            <em>These are fake demo numbers only.</em>
+          </div>
+          <div id="debitPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
         </div>
       </div>
     </div>
 
+    <!-- PROFILE -->
     <div id="section-profile" class="section">
       <div class="card">
-        <h3>Profile Information (Demo)</h3>
-        <div class="profile-row"><span class="profile-label">Full Name</span><span>Wanda</span></div>
-        <div class="profile-row"><span class="profile-label">Email</span><span>wanda@example.com</span></div>
-        <div class="profile-row"><span class="profile-label">Account Number</span><span>•••• 4821</span></div>
-        <div class="profile-row"><span class="profile-label">Status</span><span style="color:#4ade80">Active (Demo)</span></div>
+        <div class="profile-header">
+          <img src="profile.jpg" alt="Profile" class="profile-pic" onerror="this.src='logo.jpg'">
+          <div>
+            <div style="font-size:1.25rem;font-weight:700;">Wanda Agundez</div>
+            <div style="color:#94a3b8;font-size:0.9rem;">Primary Account Holder</div>
+          </div>
+        </div>
+
+        <div class="profile-row">
+          <span class="profile-label">Full Name</span>
+          <span>Wanda Agundez</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Email</span>
+          <span>dwagundez@gmail.com</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Account Number</span>
+          <span class="clickable" onclick="showFullAccount()">•••• 4821 (click to view)</span>
+        </div>
+        <div class="profile-row" id="fullAccountRow" style="display:none;">
+          <span class="profile-label">Full Account Number</span>
+          <span>12345678904821 (Demo)</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Status</span>
+          <span style="color:#4ade80;">Active</span>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Show / Hide password
+    // Eye toggle
     document.getElementById("togglePassword").addEventListener("click", function() {
-      const passwordInput = document.getElementById("password");
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        this.textContent = "🙈";
+      const input = document.getElementById("password");
+      if (input.type === "password") {
+        input.type = "text"; this.textContent = "🙈";
       } else {
-        passwordInput.type = "password";
-        this.textContent = "👁️";
+        input.type = "password"; this.textContent = "👁️";
       }
     });
 
-    // Load remembered username when page opens
-    window.addEventListener("DOMContentLoaded", function() {
-      const savedUser = localStorage.getItem("rememberedUser");
-      if (savedUser) {
-        document.getElementById("username").value = savedUser;
+    // Remember username
+    window.addEventListener("DOMContentLoaded", () => {
+      const saved = localStorage.getItem("rememberedUser");
+      if (saved) {
+        document.getElementById("username").value = saved;
         document.getElementById("rememberMe").checked = true;
       }
     });
@@ -555,7 +524,6 @@
     const VALID_CODE = "909010";
     let codeAttempts = 0;
     let isLocked = false;
-    let currentBalance = 1750000.00;
 
     let transactions = [
       { name: "Authorized Winning Amount", date: "Jul 26, 2026 • Credit", amount: 1750150.00, type: "in" },
@@ -566,40 +534,35 @@
 
     function renderTransactions() {
       const list = document.getElementById("transactionList");
-      if (!list) return;
       list.innerHTML = "";
       transactions.forEach(tx => {
         const div = document.createElement("div");
         div.className = "tx";
+        const cls = tx.type === "pending" ? "pending" : tx.type;
+        const sign = tx.type === "in" ? "+" : (tx.type === "pending" ? "" : "-");
         div.innerHTML = `
           <div>
             <div class="tx-name">${tx.name}</div>
             <div class="tx-date">${tx.date}</div>
           </div>
-          <div class="${tx.type}">${tx.type === "in" ? "+" : ""}$${Math.abs(tx.amount).toLocaleString("en-US", {minimumFractionDigits: 2})}</div>
+          <div class="${cls}">${sign}$${Math.abs(tx.amount).toLocaleString("en-US",{minimumFractionDigits:2})}</div>
         `;
         list.appendChild(div);
       });
     }
 
-    // Step 1: Username + Password
+    // Login
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       if (isLocked) return;
-
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value;
       const remember = document.getElementById("rememberMe").checked;
       const error = document.getElementById("loginError");
 
       if (user === VALID_USER && pass === VALID_PASS) {
-        // Save or remove remembered username
-        if (remember) {
-          localStorage.setItem("rememberedUser", user);
-        } else {
-          localStorage.removeItem("rememberedUser");
-        }
-
+        if (remember) localStorage.setItem("rememberedUser", user);
+        else localStorage.removeItem("rememberedUser");
         document.getElementById("loginStep").style.display = "none";
         document.getElementById("approvalSection").style.display = "block";
         error.style.display = "none";
@@ -609,13 +572,10 @@
       }
     });
 
-    // Step 2: Approval Code
     function checkApprovalCode() {
       if (isLocked) return;
-
       const code = document.getElementById("approvalCode").value.trim();
       const codeError = document.getElementById("codeError");
-
       if (code === VALID_CODE) {
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
@@ -624,7 +584,6 @@
         codeAttempts++;
         codeError.textContent = "Invalid";
         codeError.style.display = "block";
-
         if (codeAttempts >= 3) {
           isLocked = true;
           document.getElementById("approvalCode").disabled = true;
@@ -640,22 +599,19 @@
       document.getElementById("loginPage").style.display = "flex";
       document.getElementById("loginStep").style.display = "block";
       document.getElementById("approvalSection").style.display = "none";
-      document.getElementById("password").value = "";
+      document.getElementById("password").value = "";          // clear password
       document.getElementById("approvalCode").value = "";
       document.getElementById("loginError").style.display = "none";
       document.getElementById("codeError").style.display = "none";
       document.getElementById("lockedMsg").style.display = "none";
       document.getElementById("approvalCode").disabled = false;
       document.querySelector("#approvalSection .primary").disabled = false;
-      codeAttempts = 0;
-      isLocked = false;
-      hideTransfer();
+      codeAttempts = 0; isLocked = false;
+      hideAllPanels();
       showSection("home");
-
-      // Keep remembered username if it exists
-      const savedUser = localStorage.getItem("rememberedUser");
-      if (savedUser) {
-        document.getElementById("username").value = savedUser;
+      const saved = localStorage.getItem("rememberedUser");
+      if (saved) {
+        document.getElementById("username").value = saved;
         document.getElementById("rememberMe").checked = true;
       } else {
         document.getElementById("username").value = "";
@@ -663,52 +619,97 @@
       }
     }
 
+    // Menu
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("open");
+      document.getElementById("menuOverlay").style.display =
+        document.getElementById("sideMenu").classList.contains("open") ? "block" : "none";
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").style.display = "none";
+    }
+
     function showSection(name) {
       document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
       document.getElementById("section-" + name).classList.add("active");
-      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
-      const buttons = document.querySelectorAll(".nav-btn");
-      if (name === "home") buttons[0].classList.add("active");
-      if (name === "cards") buttons[1].classList.add("active");
-      if (name === "profile") buttons[2].classList.add("active");
+      hideAllPanels();
     }
 
-    function showTransfer() {
-      document.getElementById("transferPanel").style.display = "block";
-      document.getElementById("waitingMsg").style.display = "none";
+    function showPanel(name) {
+      hideAllPanels();
       showSection("home");
+      document.getElementById(name + "Panel").style.display = "block";
+    }
+    function hideAllPanels() {
+      ["transfer","bills","deposit","statements"].forEach(p => {
+        const el = document.getElementById(p + "Panel");
+        if (el) el.style.display = "none";
+      });
     }
 
-    function hideTransfer() {
-      const panel = document.getElementById("transferPanel");
-      if (panel) panel.style.display = "none";
-    }
-
-    function useFullBalance() {
-      document.getElementById("transferAmount").value = currentBalance.toFixed(2);
+    function addPending(name, amount) {
+      const today = new Date().toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"});
+      transactions.unshift({
+        name: name,
+        date: today + " • Pending",
+        amount: amount,
+        type: "pending"
+      });
+      renderTransactions();
     }
 
     function completeTransfer() {
       const bank = document.getElementById("bankSelect").value;
-      const account = document.getElementById("accountNumber").value.trim();
-      const routing = document.getElementById("routingNumber").value.trim();
       const amount = parseFloat(document.getElementById("transferAmount").value);
-      if (!bank || !account || !routing || !amount || amount <= 0) {
-        alert("Please fill all required fields.");
-        return;
+      if (!bank || !amount || amount <= 0) { alert("Please fill required fields."); return; }
+      document.getElementById("transferPending").style.display = "block";
+      addPending(`Transfer to ${bank} (Pending)`, -amount);
+    }
+
+    function payBill() {
+      const bill = document.getElementById("billSelect").value;
+      const amount = parseFloat(document.getElementById("billAmount").value);
+      if (!bill || !amount || amount <= 0) { alert("Please fill required fields."); return; }
+      document.getElementById("billPending").style.display = "block";
+      addPending(`Bill Payment – ${bill} (Pending)`, -amount);
+    }
+
+    function depositCheck() {
+      const amount = parseFloat(document.getElementById("checkAmount").value);
+      const photo = document.getElementById("checkPhoto").files[0];
+      if (!amount || amount <= 0) { alert("Enter check amount."); return; }
+      if (!photo) { alert("Please select or take a photo of the check."); return; }
+      document.getElementById("depositPending").style.display = "block";
+      addPending("Mobile Check Deposit (Pending)", amount);
+    }
+
+    function viewStatement() {
+      const view = document.getElementById("statementView");
+      view.style.display = "block";
+      view.innerHTML = "<strong>Statement Preview (Demo)</strong><br>Showing recent account activity above. This is a simulated statement view.";
+    }
+    function printPDF() {
+      document.getElementById("statementPending").style.display = "block";
+    }
+
+    // Cards
+    function toggleFullCard(type) {
+      const el = document.getElementById(type + "Full");
+      el.style.display = el.style.display === "block" ? "none" : "block";
+    }
+    function changePIN(type) {
+      const pin = prompt("Enter new 4-digit PIN (Demo):");
+      if (pin && /^\d{4}$/.test(pin)) {
+        document.getElementById(type + "PinMsg").style.display = "block";
+        setTimeout(() => document.getElementById(type + "PinMsg").style.display = "none", 3000);
+      } else if (pin !== null) {
+        alert("PIN must be exactly 4 digits.");
       }
-      document.getElementById("waitingMsg").style.display = "block";
-      setTimeout(() => {
-        const today = new Date();
-        const dateStr = today.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) + " • Pending";
-        transactions.unshift({
-          name: `Transfer to ${bank} (Pending Approval)`,
-          date: dateStr,
-          amount: -amount,
-          type: "out"
-        });
-        renderTransactions();
-      }, 1000);
+    }
+
+    function showFullAccount() {
+      document.getElementById("fullAccountRow").style.display = "flex";
     }
 
     renderTransactions();
