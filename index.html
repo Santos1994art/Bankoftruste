@@ -109,13 +109,12 @@
     .bank-name { font-size: 1.15rem; font-weight: 700; }
     .user-info { font-size: 0.85rem; color: #94a3b8; }
 
-    /* Hamburger */
     .hamburger {
       width: 28px; height: 22px; display: flex; flex-direction: column;
       justify-content: space-between; cursor: pointer; z-index: 20;
     }
     .hamburger span {
-      display: block; height: 3px; background: #e2e8f0; border-radius: 2px; transition: 0.25s;
+      display: block; height: 3px; background: #e2e8f0; border-radius: 2px;
     }
     .menu-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 30; display: none;
@@ -171,7 +170,7 @@
       color: #e2e8f0; width: 100%; padding: 0.65rem; border-radius: 8px;
       margin-bottom: 0.7rem; cursor: pointer;
     }
-    .waiting-box, .pending-box {
+    .pending-box {
       background: rgba(120,53,15,0.4); border: 1px solid rgba(251,191,36,0.4);
       color: #fde68a; padding: 0.9rem; border-radius: 8px; text-align: center;
       margin-top: 0.9rem; display: none;
@@ -188,10 +187,9 @@
     .out { color: #f87171; font-weight: 600; }
     .pending { color: #fbbf24; font-weight: 600; }
 
-    /* Cards */
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
-      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white; position: relative;
+      border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem; color: white;
     }
     .card-item.debit { background: linear-gradient(135deg, #334155, #1e293b); }
     .card-type { font-size: 0.85rem; opacity: 0.85; }
@@ -207,8 +205,11 @@
       background: rgba(0,0,0,0.35); padding: 0.8rem; border-radius: 8px;
       margin-top: 0.8rem; font-size: 0.9rem; display: none;
     }
+    .success-msg {
+      background: rgba(22,101,52,0.4); color: #86efac; padding: 0.7rem;
+      border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none;
+    }
 
-    /* Profile */
     .profile-header {
       display: flex; align-items: center; gap: 18px; margin-bottom: 1.4rem;
     }
@@ -223,16 +224,11 @@
     .profile-row:last-child { border-bottom: none; }
     .profile-label { color: #94a3b8; }
     .clickable { color: #38bdf8; cursor: pointer; text-decoration: underline; }
-
-    .success-msg {
-      background: rgba(22,101,52,0.4); color: #86efac; padding: 0.7rem;
-      border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none;
-    }
   </style>
 </head>
 <body>
 
-  <!-- ========== LOGIN ========== -->
+  <!-- LOGIN PAGE -->
   <div id="loginPage">
     <div class="fdic-bar">FDIC FDIC-Insured - Backed by the full faith and credit of the Government</div>
     <div class="login-content">
@@ -294,7 +290,7 @@
     </div>
   </div>
 
-  <!-- ========== DASHBOARD ========== -->
+  <!-- DASHBOARD -->
   <div id="dashboardPage">
     <div class="top-bar">
       <div class="top-bar-left">
@@ -309,7 +305,6 @@
       </div>
     </div>
 
-    <!-- Side Menu -->
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
       <h3>Menu</h3>
@@ -406,7 +401,6 @@
         <div id="statementView" style="display:none;margin-top:15px;font-size:0.9rem;"></div>
       </div>
 
-      <!-- Transactions -->
       <div class="card">
         <h3>Recent Account Activity</h3>
         <div id="transactionList"></div>
@@ -418,11 +412,10 @@
       <div class="card">
         <h3>Your Cards (Demo)</h3>
 
-        <!-- Credit Card -->
         <div class="card-item">
           <div class="card-type">Visa Platinum • Credit</div>
           <div class="card-name">Wanda Agundez</div>
-          <div class="card-number" id="creditNumDisplay">•••• •••• •••• 4821</div>
+          <div class="card-number">•••• •••• •••• 4821</div>
           <div class="card-footer">
             <span>Exp 08/28</span>
             <span>CVV •••</span>
@@ -440,11 +433,10 @@
           <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
         </div>
 
-        <!-- Debit Card -->
         <div class="card-item debit">
           <div class="card-type">Mastercard Debit</div>
           <div class="card-name">Wanda Agundez</div>
-          <div class="card-number" id="debitNumDisplay">•••• •••• •••• 7394</div>
+          <div class="card-number">•••• •••• •••• 7394</div>
           <div class="card-footer">
             <span>Exp 11/27</span>
             <span>CVV •••</span>
@@ -500,6 +492,27 @@
   </div>
 
   <script>
+    // ===== Keep user logged in after refresh =====
+    function checkLoginState() {
+      if (sessionStorage.getItem("isLoggedIn") === "true") {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+        renderTransactions();
+      }
+    }
+
+    // Run on page load
+    window.addEventListener("DOMContentLoaded", function() {
+      checkLoginState();
+
+      // Remember username
+      const saved = localStorage.getItem("rememberedUser");
+      if (saved) {
+        document.getElementById("username").value = saved;
+        document.getElementById("rememberMe").checked = true;
+      }
+    });
+
     // Eye toggle
     document.getElementById("togglePassword").addEventListener("click", function() {
       const input = document.getElementById("password");
@@ -507,15 +520,6 @@
         input.type = "text"; this.textContent = "🙈";
       } else {
         input.type = "password"; this.textContent = "👁️";
-      }
-    });
-
-    // Remember username
-    window.addEventListener("DOMContentLoaded", () => {
-      const saved = localStorage.getItem("rememberedUser");
-      if (saved) {
-        document.getElementById("username").value = saved;
-        document.getElementById("rememberMe").checked = true;
       }
     });
 
@@ -534,6 +538,7 @@
 
     function renderTransactions() {
       const list = document.getElementById("transactionList");
+      if (!list) return;
       list.innerHTML = "";
       transactions.forEach(tx => {
         const div = document.createElement("div");
@@ -551,7 +556,7 @@
       });
     }
 
-    // Login
+    // Login Step 1
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       if (isLocked) return;
@@ -572,11 +577,15 @@
       }
     });
 
+    // Login Step 2 - Approval Code
     function checkApprovalCode() {
       if (isLocked) return;
       const code = document.getElementById("approvalCode").value.trim();
       const codeError = document.getElementById("codeError");
       if (code === VALID_CODE) {
+        // Save login state so refresh does not kick the user out
+        sessionStorage.setItem("isLoggedIn", "true");
+
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
         renderTransactions();
@@ -595,20 +604,25 @@
     }
 
     function logout() {
+      // Clear login state
+      sessionStorage.removeItem("isLoggedIn");
+
       document.getElementById("dashboardPage").style.display = "none";
       document.getElementById("loginPage").style.display = "flex";
       document.getElementById("loginStep").style.display = "block";
       document.getElementById("approvalSection").style.display = "none";
-      document.getElementById("password").value = "";          // clear password
+      document.getElementById("password").value = "";
       document.getElementById("approvalCode").value = "";
       document.getElementById("loginError").style.display = "none";
       document.getElementById("codeError").style.display = "none";
       document.getElementById("lockedMsg").style.display = "none";
       document.getElementById("approvalCode").disabled = false;
       document.querySelector("#approvalSection .primary").disabled = false;
-      codeAttempts = 0; isLocked = false;
+      codeAttempts = 0;
+      isLocked = false;
       hideAllPanels();
       showSection("home");
+
       const saved = localStorage.getItem("rememberedUser");
       if (saved) {
         document.getElementById("username").value = saved;
@@ -693,7 +707,6 @@
       document.getElementById("statementPending").style.display = "block";
     }
 
-    // Cards
     function toggleFullCard(type) {
       const el = document.getElementById(type + "Full");
       el.style.display = el.style.display === "block" ? "none" : "block";
