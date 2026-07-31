@@ -5,31 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bank of Trusts - Educational Demo Only</title>
   <style>
-    :root {
-      --bg: #0a1628;
-      --card: rgba(15, 23, 42, 0.88);
-      --border: rgba(148, 163, 184, 0.2);
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --green: #4ade80;
-      --red: #f87171;
-    }
-    body.light {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --border: #cbd5e1;
-      --text: #0f172a;
-      --muted: #64748b;
-      --accent: #0284c7;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+
     body {
       min-height: 100vh;
-      color: var(--text);
-      background: var(--bg);
-      transition: background 0.3s, color 0.3s;
+      color: #e2e8f0;
+      background: #0a1628;
     }
 
     /* ========== LOGIN PAGE ========== */
@@ -44,187 +25,254 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(10, 22, 40, 0.72);
+      background: rgba(10, 22, 40, 0.68);
       z-index: 0;
     }
-    .login-wrapper {
+
+    /* Top FDIC bar */
+    .fdic-bar {
+      position: relative;
+      z-index: 2;
+      background: #ffffff;
+      color: #0f172a;
+      text-align: center;
+      padding: 9px 15px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .login-content {
       position: relative;
       z-index: 1;
       flex: 1;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 30px 20px;
+      justify-content: space-between;
+      padding: 30px 40px;
+      gap: 30px;
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
     }
 
-    .login-top-features {
+    /* Left side feature buttons */
+    .left-features {
       display: flex;
-      flex-wrap: wrap;
-      gap: 18px 28px;
-      justify-content: center;
-      margin-bottom: 25px;
-      font-size: 0.95rem;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 200px;
     }
-    .login-top-features span {
-      color: #e2e8f0;
-      cursor: default;
-      opacity: 0.9;
+    .left-feature {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #f1f5f9;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 13px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: left;
+      backdrop-filter: blur(6px);
+    }
+    .left-feature:hover {
+      background: rgba(14, 165, 233, 0.25);
+      border-color: rgba(56, 189, 248, 0.5);
+      transform: translateX(4px);
+    }
+
+    /* Right side - headline + login card */
+    .right-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      max-width: 420px;
+      width: 100%;
     }
 
     .main-headline {
-      text-align: center;
-      margin-bottom: 8px;
+      text-align: right;
+      margin-bottom: 6px;
     }
     .main-headline h1 {
-      font-size: 1.9rem;
+      font-size: 1.75rem;
       font-weight: 700;
       color: #ffffff;
-      letter-spacing: -0.3px;
+      line-height: 1.25;
     }
     .sub-headline {
-      text-align: center;
+      text-align: right;
       color: #cbd5e1;
-      font-size: 1rem;
-      margin-bottom: 28px;
+      font-size: 0.98rem;
+      margin-bottom: 22px;
     }
 
     .login-card {
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      padding: 2.2rem 2rem;
-      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 1.6rem 1.5rem;
+      border-radius: 16px;
       width: 100%;
-      max-width: 400px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
     }
-    .login-logo { text-align: center; margin-bottom: 0.8rem; }
-    .login-logo img { max-width: 200px; height: auto; }
+    .login-logo {
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .login-logo img {
+      max-width: 170px;
+      height: auto;
+    }
     .demo-badge {
       display: inline-block;
-      background: rgba(239, 68, 68, 0.25);
+      background: rgba(239, 68, 68, 0.22);
       color: #fca5a5;
-      font-size: 0.72rem;
-      padding: 0.28rem 0.75rem;
+      font-size: 0.68rem;
+      padding: 0.22rem 0.65rem;
       border-radius: 999px;
-      margin-bottom: 1.2rem;
-      border: 1px solid rgba(239, 68, 68, 0.35);
+      margin-bottom: 1rem;
+      border: 1px solid rgba(239, 68, 68, 0.3);
     }
-    label { display: block; margin-bottom: 0.3rem; font-size: 0.88rem; color: #94a3b8; }
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.84rem;
+      color: #94a3b8;
+    }
     input {
       width: 100%;
-      padding: 0.75rem 0.95rem;
-      margin-bottom: 0.95rem;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.6);
+      padding: 0.65rem 0.85rem;
+      margin-bottom: 0.85rem;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.55);
       color: white;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
     }
-    input:focus { outline: none; border-color: #38bdf8; }
+    input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
     button.primary {
       width: 100%;
-      padding: 0.85rem;
+      padding: 0.72rem;
       background: linear-gradient(90deg, #0ea5e9, #2563eb);
       color: white;
       border: none;
-      border-radius: 10px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 0.98rem;
       font-weight: 600;
       cursor: pointer;
+    }
+    button.primary:hover {
+      filter: brightness(1.08);
     }
     .error-msg {
       background: rgba(127, 29, 29, 0.5);
       color: #fecaca;
-      padding: 0.75rem;
+      padding: 0.65rem;
       border-radius: 8px;
       text-align: center;
-      margin-top: 0.9rem;
+      margin-top: 0.8rem;
       display: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .create-account {
       text-align: center;
-      margin-top: 1.1rem;
-      font-size: 0.9rem;
+      margin-top: 0.95rem;
+      font-size: 0.88rem;
       color: #94a3b8;
     }
     .create-account span {
       color: #38bdf8;
       cursor: default;
     }
-    .credentials {
-      margin-top: 1.3rem;
-      font-size: 0.78rem;
-      color: #64748b;
-      text-align: center;
-      line-height: 1.5;
-    }
 
-    /* Bottom links on login */
+    /* Bottom section */
     .login-bottom {
       position: relative;
       z-index: 1;
-      padding: 25px 20px 15px;
+      padding: 18px 20px 12px;
       text-align: center;
     }
     .bottom-columns {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 22px;
+      gap: 50px;
+      margin-bottom: 14px;
     }
     .bottom-col h4 {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: #f1f5f9;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .bottom-col p {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       color: #94a3b8;
-      margin: 4px 0;
+      margin: 3px 0;
       cursor: default;
     }
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 18px;
-      margin-bottom: 18px;
-      font-size: 1.35rem;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 1.25rem;
     }
     .social-icons span { cursor: default; opacity: 0.85; }
     .footer-tiny {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: #64748b;
-      letter-spacing: 0.2px;
     }
 
-    /* ========== DASHBOARD (kept from previous version) ========== */
+    /* Responsive */
+    @media (max-width: 900px) {
+      .login-content {
+        flex-direction: column;
+        padding: 25px 20px;
+      }
+      .left-features {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
+      .right-side {
+        align-items: center;
+      }
+      .main-headline, .sub-headline {
+        text-align: center;
+      }
+    }
+
+    /* ========== DASHBOARD (unchanged core) ========== */
     #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px; }
     .top-bar {
-      background: var(--card); border: 1px solid var(--border); padding: 0.8rem 1.3rem;
-      border-radius: 14px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(148,163,184,0.2);
+      padding: 0.8rem 1.3rem; border-radius: 14px;
+      display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;
     }
     .top-bar-left { display: flex; align-items: center; gap: 12px; }
     .top-bar-left img { height: 42px; width: auto; }
     .bank-name { font-size: 1.2rem; font-weight: 700; }
-    .user-info { font-size: 0.85rem; color: var(--muted); }
+    .user-info { font-size: 0.85rem; color: #94a3b8; }
     .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .nav-btn, .logout-btn, .theme-btn {
       padding: 0.4rem 0.9rem; background: rgba(51, 65, 85, 0.7);
-      border: 1px solid var(--border); color: var(--text); border-radius: 8px;
-      cursor: pointer; font-size: 0.85rem;
+      border: 1px solid rgba(148,163,184,0.25); color: #e2e8f0;
+      border-radius: 8px; cursor: pointer; font-size: 0.85rem;
     }
     .nav-btn.active { background: #0ea5e9; border-color: #0ea5e9; color: white; }
     .section { display: none; }
     .section.active { display: block; }
     .balance-card {
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(37, 99, 235, 0.15));
-      border: 1px solid rgba(56, 189, 248, 0.3); padding: 1.6rem; border-radius: 16px; margin-bottom: 1.4rem;
+      background: linear-gradient(135deg, rgba(14,165,233,0.25), rgba(37,99,235,0.15));
+      border: 1px solid rgba(56,189,248,0.3); padding: 1.6rem; border-radius: 16px; margin-bottom: 1.4rem;
     }
     .balance-label { font-size: 0.95rem; color: #bae6fd; }
     .balance-amount { font-size: 2.4rem; font-weight: 700; margin-top: 0.25rem; }
@@ -234,40 +282,40 @@
       gap: 0.9rem; margin-bottom: 1.4rem;
     }
     .feature-btn {
-      background: var(--card); border: 1px solid var(--border); padding: 1.1rem 0.7rem;
-      border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s;
+      background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
+      padding: 1.1rem 0.7rem; border-radius: 12px; text-align: center; cursor: pointer;
     }
-    .feature-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .feature-btn:hover { border-color: #38bdf8; }
     .feature-btn .icon { font-size: 1.45rem; margin-bottom: 0.3rem; }
     .feature-btn .label { font-size: 0.88rem; }
     .card {
-      background: var(--card); border: 1px solid var(--border);
+      background: rgba(15,23,42,0.85); border: 1px solid rgba(148,163,184,0.2);
       border-radius: 14px; padding: 1.3rem; margin-bottom: 1.3rem;
     }
-    .card h3 { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
+    .card h3 { font-size: 1rem; color: #94a3b8; margin-bottom: 1rem; }
     #transferPanel { display: none; }
-    .panel-title { font-size: 1.15rem; color: var(--accent); margin-bottom: 1.1rem; font-weight: 600; }
+    .panel-title { font-size: 1.15rem; color: #38bdf8; margin-bottom: 1.1rem; font-weight: 600; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     .full-btn {
-      background: rgba(51, 65, 85, 0.85); border: 1px solid var(--border);
-      color: var(--text); width: 100%; padding: 0.7rem; border-radius: 10px;
+      background: rgba(51,65,85,0.85); border: 1px solid rgba(148,163,184,0.25);
+      color: #e2e8f0; width: 100%; padding: 0.7rem; border-radius: 10px;
       margin-bottom: 0.8rem; cursor: pointer;
     }
     .waiting-box {
-      background: rgba(120, 53, 15, 0.4); border: 1px solid rgba(251, 191, 36, 0.4);
+      background: rgba(120,53,15,0.4); border: 1px solid rgba(251,191,36,0.4);
       color: #fde68a; padding: 1rem; border-radius: 10px; text-align: center;
       margin-top: 1rem; display: none;
     }
     .tx {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+      padding: 0.85rem 0; border-bottom: 1px solid rgba(51,65,85,0.6);
     }
     .tx:last-child { border-bottom: none; }
     .tx-name { font-weight: 500; }
-    .tx-date { font-size: 0.8rem; color: var(--muted); }
-    .in { color: var(--green); font-weight: 600; }
-    .out { color: var(--red); font-weight: 600; }
+    .tx-date { font-size: 0.8rem; color: #64748b; }
+    .in { color: #4ade80; font-weight: 600; }
+    .out { color: #f87171; font-weight: 600; }
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
       border-radius: 14px; padding: 1.4rem; margin-bottom: 1rem; color: white;
@@ -282,65 +330,67 @@
     }
     .profile-row {
       display: flex; justify-content: space-between; padding: 0.7rem 0;
-      border-bottom: 1px solid var(--border); font-size: 0.95rem;
+      border-bottom: 1px solid rgba(51,65,85,0.6); font-size: 0.95rem;
     }
     .profile-row:last-child { border-bottom: none; }
-    .profile-label { color: var(--muted); }
+    .profile-label { color: #94a3b8; }
   </style>
 </head>
 <body>
 
   <!-- ==================== LOGIN PAGE ==================== -->
   <div id="loginPage">
-    <div class="login-wrapper">
-      <!-- Top feature links (do nothing when clicked) -->
-      <div class="login-top-features">
-        <span>Credit Cards</span>
-        <span>Checking & Savings</span>
-        <span>Auto</span>
-        <span>Business</span>
+    <!-- White FDIC top bar -->
+    <div class="fdic-bar">
+      FDIC FDIC-Insured - Backed by the full faith and credit of the Government
+    </div>
+
+    <div class="login-content">
+      <!-- LEFT side feature buttons -->
+      <div class="left-features">
+        <div class="left-feature">Credit Cards</div>
+        <div class="left-feature">Checking & Savings</div>
+        <div class="left-feature">Auto</div>
+        <div class="left-feature">Business</div>
       </div>
 
-      <!-- Bold headline + sub text -->
-      <div class="main-headline">
-        <h1>Grow Your Money With Confidence</h1>
-      </div>
-      <div class="sub-headline">
-        - Your Future &nbsp;&nbsp; - Our Priority
-      </div>
-
-      <!-- Login card -->
-      <div class="login-card">
-        <div class="login-logo">
-          <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 200px; height: auto;">
+      <!-- RIGHT side -->
+      <div class="right-side">
+        <div class="main-headline">
+          <h1>Grow Your Money With Confidence</h1>
         </div>
-        <div style="text-align:center">
-          <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
+        <div class="sub-headline">
+          - Your Future &nbsp;&nbsp; - Our Priority
         </div>
 
-        <form id="loginForm">
-          <label>Username / Account Number</label>
-          <input type="text" id="username" placeholder="Enter username" required>
-          <label>Password</label>
-          <input type="password" id="password" placeholder="Enter password" required>
-          <button type="submit" class="primary">Sign In Securely</button>
-        </form>
+        <div class="login-card">
+          <div class="login-logo">
+            <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 170px; height: auto;">
+          </div>
+          <div style="text-align:center">
+            <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
+          </div>
 
-        <div id="loginError" class="error-msg">Invalid username or password</div>
+          <form id="loginForm">
+            <label>Username / Account Number</label>
+            <input type="text" id="username" placeholder="Enter username" required>
 
-        <div class="create-account">
-          Don’t have an account? <span>Create account</span>
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password" required>
+
+            <button type="submit" class="primary">Sign In</button>
+          </form>
+
+          <div id="loginError" class="error-msg">Invalid username or password</div>
+
+          <div class="create-account">
+            Don’t have an account? <span>Create account</span>
+          </div>
         </div>
-
-        <p class="credentials">
-          <strong>Demo credentials:</strong><br>
-          Username: demo<br>
-          Password: password123
-        </p>
       </div>
     </div>
 
-    <!-- Bottom section -->
+    <!-- Bottom -->
     <div class="login-bottom">
       <div class="bottom-columns">
         <div class="bottom-col">
@@ -368,7 +418,7 @@
     </div>
   </div>
 
-  <!-- ==================== DASHBOARD (same as before) ==================== -->
+  <!-- ==================== DASHBOARD ==================== -->
   <div id="dashboardPage">
     <div class="top-bar">
       <div class="top-bar-left">
@@ -390,7 +440,7 @@
     <div id="section-home" class="section active">
       <div class="balance-card">
         <div class="balance-label">Available Balance</div>
-        <div class="balance-amount" id="balanceDisplay">$1,750,000.00</div>
+        <div class="balance-amount">$1,750,000.00</div>
         <div class="balance-note">Demo account • For learning purposes only</div>
       </div>
 
@@ -500,7 +550,7 @@
         <div class="profile-row"><span class="profile-label">Email</span><span>demo.user@example.com</span></div>
         <div class="profile-row"><span class="profile-label">Phone</span><span>+1 (555) 010-9999</span></div>
         <div class="profile-row"><span class="profile-label">Account Number</span><span>•••• 4821</span></div>
-        <div class="profile-row"><span class="profile-label">Status</span><span style="color:var(--green)">Active (Demo)</span></div>
+        <div class="profile-row"><span class="profile-label">Status</span><span style="color:#4ade80">Active (Demo)</span></div>
       </div>
     </div>
   </div>
