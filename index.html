@@ -8,7 +8,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
 
-    /* Fade animation */
     .fade { animation: fadeIn 0.35s ease; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -329,7 +328,6 @@
       font-size: 0.88rem;
     }
 
-    /* Admin Policy Panel */
     .policy-panel {
       display: none;
       margin-top: 1.2rem;
@@ -577,9 +575,9 @@
               <button onclick="changePIN('credit')">Change PIN</button>
             </div>
             <div class="full-details" id="creditFull">
-              <strong>Full Card Number (Demo):</strong> 4111 1111 1111 4821<br>
+              <strong>Full Card Number (Demo):</strong> 4531 5221 8625 4821<br>
               <strong>Expiry:</strong> 08/28<br>
-              <strong>CVV:</strong> 123<br>
+              <strong>CVV:</strong> 662<br>
               <em>These are fake demo numbers only.</em>
             </div>
             <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
@@ -598,7 +596,7 @@
               <button onclick="changePIN('debit')">Change PIN</button>
             </div>
             <div class="full-details" id="debitFull">
-              <strong>Full Card Number (Demo):</strong> 5555 5555 5555 7394<br>
+              <strong>Full Card Number (Demo):</strong> 5591 7415 5751 7394<br>
               <strong>Expiry:</strong> 11/27<br>
               <strong>CVV:</strong> 456<br>
               <em>These are fake demo numbers only.</em>
@@ -651,14 +649,12 @@
             <div id="bioMsg" class="success-msg" style="margin-top:10px;"></div>
           </div>
 
-          <!-- Admin Policy Toggle -->
           <div style="margin-top: 1.3rem; text-align: center;">
             <button class="primary" style="width: auto; padding: 0.55rem 1.2rem;" onclick="togglePolicyPanel()">
               Admin Policy Panel
             </button>
           </div>
 
-          <!-- Admin Policy Panel -->
           <div class="policy-panel" id="policyPanel">
             <h4>Access Control Policies (Educational Demo)</h4>
 
@@ -862,7 +858,8 @@
       }
     });
 
-    const VALID_USER = "Wanda";
+    // UPDATED CREDENTIALS
+    const VALID_USER = "10010432";
     const VALID_PASS = "Fussy27shadow!";
     const VALID_CODE = "909010";
     let codeAttempts = 0;
