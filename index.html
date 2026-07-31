@@ -8,10 +8,18 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
 
+    /* Fade animation */
+    .fade { animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* ===== LOGIN ===== */
     #loginPage {
       min-height: 100vh; display: flex; flex-direction: column;
       background: url('background.jpg') center center / cover no-repeat; position: relative;
+      transition: opacity 0.35s ease;
     }
     #loginPage::before {
       content: ''; position: absolute; inset: 0;
@@ -108,11 +116,9 @@
       display: none;
       min-height: 100vh;
       background: linear-gradient(135deg, #0a1628, #0f2744);
-      position: relative;
+      transition: opacity 0.35s ease;
     }
     .dashboard-inner {
-      position: relative;
-      z-index: 1;
       max-width: 980px;
       margin: 0 auto;
       padding: 18px 18px 50px;
@@ -127,6 +133,24 @@
     .top-bar-left img.logo { height: 36px; }
     .bank-name { font-size: 1.05rem; font-weight: 700; }
     .user-info { font-size: 0.8rem; color: #94a3b8; }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logout-top-btn {
+      padding: 0.4rem 0.9rem;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .logout-top-btn:hover {
+      background: rgba(239, 68, 68, 0.35);
+    }
 
     .hamburger {
       width: 26px; height: 20px; display: flex; flex-direction: column;
@@ -189,7 +213,19 @@
       border-radius: 14px; margin-bottom: 1.1rem;
     }
     .balance-label { font-size: 0.88rem; color: #bae6fd; }
-    .balance-amount { font-size: 1.9rem; font-weight: 700; margin-top: 0.15rem; }
+    .balance-amount {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-top: 0.15rem;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+      display: inline-block;
+      user-select: none;
+    }
+    .balance-amount.blurred {
+      filter: blur(7px);
+      letter-spacing: 1px;
+    }
     .balance-note { font-size: 0.75rem; color: #7dd3fc; margin-top: 0.25rem; }
 
     .features {
@@ -292,6 +328,35 @@
       cursor: pointer;
       font-size: 0.88rem;
     }
+
+    /* Admin Policy Panel */
+    .policy-panel {
+      display: none;
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+    }
+    .policy-panel h4 {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: #7dd3fc;
+    }
+    .policy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      font-size: 0.88rem;
+    }
+    .policy-row:last-child { border-bottom: none; }
+    .policy-row label { color: #e2e8f0; margin: 0; }
+    .policy-row input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+    .policy-row input[type="number"] {
+      width: 120px; padding: 5px 8px; margin: 0; font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -333,7 +398,6 @@
               <button type="submit" class="primary">Sign In</button>
             </form>
 
-            <!-- Biometric Login Button (appears after enabling) -->
             <button class="bio-login-btn" id="bioLoginBtn" onclick="biometricLogin()">
               🔒 Sign in with Biometrics
             </button>
@@ -375,8 +439,11 @@
             <div class="user-info">Welcome, Wanda Agundez</div>
           </div>
         </div>
-        <div class="hamburger" onclick="toggleMenu()">
-          <span></span><span></span><span></span>
+        <div class="top-bar-right">
+          <button class="logout-top-btn" onclick="logout()">Log Out</button>
+          <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+          </div>
         </div>
       </div>
 
@@ -401,8 +468,10 @@
 
         <div class="balance-card">
           <div class="balance-label">Available Balance</div>
-          <div class="balance-amount">$1,750,000.00</div>
-          <div class="balance-note">Demo account • For learning purposes only</div>
+          <div class="balance-amount blurred" id="balanceAmount" onclick="toggleBalance()">
+            $1,750,000.00
+          </div>
+          <div class="balance-note">Demo account • Click amount to show/hide</div>
         </div>
 
         <div class="features">
@@ -576,10 +645,47 @@
           </div>
 
           <div class="biometric-box">
-            <div style="font-size:0.9rem;margin-bottom:4px;">Biometric Login</div>
-            <div style="font-size:0.8rem;color:#94a3b8;">Enable fingerprint or face recognition (Demo)</div>
+            <div style="font-size:0.9rem;margin-bottom:4px;">Biometric Login (WebAuthn)</div>
+            <div style="font-size:0.8rem;color:#94a3b8;">Register fingerprint or face recognition</div>
             <button onclick="enableBiometric()">Enable Biometric</button>
-            <div id="bioMsg" class="success-msg" style="margin-top:10px;">Biometric login enabled successfully (Demo)</div>
+            <div id="bioMsg" class="success-msg" style="margin-top:10px;"></div>
+          </div>
+
+          <!-- Admin Policy Toggle -->
+          <div style="margin-top: 1.3rem; text-align: center;">
+            <button class="primary" style="width: auto; padding: 0.55rem 1.2rem;" onclick="togglePolicyPanel()">
+              Admin Policy Panel
+            </button>
+          </div>
+
+          <!-- Admin Policy Panel -->
+          <div class="policy-panel" id="policyPanel">
+            <h4>Access Control Policies (Educational Demo)</h4>
+
+            <div class="policy-row">
+              <label>Allow Transfers</label>
+              <input type="checkbox" id="pol_canTransfer" checked onchange="updatePolicy('canTransfer', this.checked)">
+            </div>
+            <div class="policy-row">
+              <label>Allow Pay Bills</label>
+              <input type="checkbox" id="pol_canPayBills" checked onchange="updatePolicy('canPayBills', this.checked)">
+            </div>
+            <div class="policy-row">
+              <label>Allow Mobile Deposit</label>
+              <input type="checkbox" id="pol_canDeposit" checked onchange="updatePolicy('canDeposit', this.checked)">
+            </div>
+            <div class="policy-row">
+              <label>Allow View Full Card</label>
+              <input type="checkbox" id="pol_canViewFullCard" checked onchange="updatePolicy('canViewFullCard', this.checked)">
+            </div>
+            <div class="policy-row">
+              <label>Allow Change PIN</label>
+              <input type="checkbox" id="pol_canChangePIN" checked onchange="updatePolicy('canChangePIN', this.checked)">
+            </div>
+            <div class="policy-row">
+              <label>Max Transfer Amount ($)</label>
+              <input type="number" id="pol_maxTransfer" value="500000" min="0" step="1000" onchange="updateMaxTransfer(this.value)">
+            </div>
           </div>
         </div>
       </div>
@@ -587,13 +693,148 @@
   </div>
 
   <script>
-    // Check if biometric is enabled
+    // ========== Access Control ==========
+    const AccessControl = {
+      policies: {
+        canTransfer: true,
+        canPayBills: true,
+        canDeposit: true,
+        canViewFullCard: true,
+        canChangePIN: true,
+        maxTransferAmount: 500000
+      },
+      check(action, amount = 0) {
+        if (!this.policies[action]) {
+          alert("Access Denied: You do not have permission for this action.\n(Demo Policy)");
+          return false;
+        }
+        if (action === "canTransfer" && amount > this.policies.maxTransferAmount) {
+          alert(`Access Denied: Amount exceeds the maximum allowed transfer of $${this.policies.maxTransferAmount.toLocaleString()}.\n(Demo Policy)`);
+          return false;
+        }
+        return true;
+      }
+    };
+
+    function togglePolicyPanel() {
+      const panel = document.getElementById("policyPanel");
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    }
+    function updatePolicy(key, value) {
+      AccessControl.policies[key] = value;
+    }
+    function updateMaxTransfer(value) {
+      AccessControl.policies.maxTransferAmount = parseFloat(value) || 0;
+    }
+
+    // ========== WebAuthn Helpers ==========
+    function bufferToBase64(buffer) {
+      return btoa(String.fromCharCode(...new Uint8Array(buffer)));
+    }
+    function base64ToBuffer(base64) {
+      return Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+    }
+    function isWebAuthnSupported() {
+      return window.PublicKeyCredential && typeof window.PublicKeyCredential === "function";
+    }
+
     function updateBioButton() {
-      const enabled = localStorage.getItem("biometricEnabled") === "true";
+      const enabled = localStorage.getItem("webauthnCredentialId");
       const btn = document.getElementById("bioLoginBtn");
       if (btn) btn.style.display = enabled ? "block" : "none";
     }
 
+    async function enableBiometric() {
+      const msg = document.getElementById("bioMsg");
+      msg.style.display = "block";
+
+      if (!isWebAuthnSupported()) {
+        msg.textContent = "WebAuthn is not supported in this browser.";
+        msg.style.color = "#fca5a5";
+        return;
+      }
+
+      try {
+        const challenge = new Uint8Array(32);
+        crypto.getRandomValues(challenge);
+
+        const publicKey = {
+          challenge: challenge,
+          rp: {
+            name: "Bank of Trusts Demo",
+            id: window.location.hostname === "" ? "localhost" : window.location.hostname
+          },
+          user: {
+            id: new Uint8Array(16),
+            name: "wanda@demo.local",
+            displayName: "Wanda Agundez"
+          },
+          pubKeyCredParams: [
+            { type: "public-key", alg: -7 },
+            { type: "public-key", alg: -257 }
+          ],
+          authenticatorSelection: {
+            authenticatorAttachment: "platform",
+            userVerification: "required",
+            residentKey: "preferred"
+          },
+          timeout: 60000,
+          attestation: "none"
+        };
+
+        const credential = await navigator.credentials.create({ publicKey });
+        localStorage.setItem("webauthnCredentialId", bufferToBase64(credential.rawId));
+        localStorage.setItem("biometricEnabled", "true");
+
+        msg.textContent = "Biometric registered successfully!";
+        msg.style.color = "#86efac";
+        updateBioButton();
+      } catch (err) {
+        console.error(err);
+        msg.textContent = "Biometric registration failed or was cancelled.";
+        msg.style.color = "#fca5a5";
+      }
+    }
+
+    async function biometricLogin() {
+      if (!isWebAuthnSupported()) {
+        alert("WebAuthn is not supported in this browser.");
+        return;
+      }
+      const credId = localStorage.getItem("webauthnCredentialId");
+      if (!credId) {
+        alert("No biometric credential found. Please enable it first from Profile.");
+        return;
+      }
+
+      try {
+        const challenge = new Uint8Array(32);
+        crypto.getRandomValues(challenge);
+
+        const publicKey = {
+          challenge: challenge,
+          allowCredentials: [{
+            id: base64ToBuffer(credId),
+            type: "public-key",
+            transports: ["internal"]
+          }],
+          userVerification: "required",
+          timeout: 60000
+        };
+
+        const assertion = await navigator.credentials.get({ publicKey });
+        if (assertion) {
+          document.getElementById("loginStep").style.display = "none";
+          document.getElementById("approvalSection").style.display = "block";
+          document.getElementById("loginError").style.display = "none";
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Biometric authentication failed or was cancelled.");
+      }
+    }
+
+    // ========== App Logic ==========
     function checkLoginState() {
       if (sessionStorage.getItem("isLoggedIn") === "true") {
         document.getElementById("loginPage").style.display = "none";
@@ -654,7 +895,10 @@
       });
     }
 
-    // Normal login
+    function toggleBalance() {
+      document.getElementById("balanceAmount").classList.toggle("blurred");
+    }
+
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       if (isLocked) return;
@@ -675,27 +919,23 @@
       }
     });
 
-    // Biometric login (skips password)
-    function biometricLogin() {
-      if (localStorage.getItem("biometricEnabled") !== "true") {
-        alert("Biometric login is not enabled yet.");
-        return;
-      }
-      // Simulate successful biometric scan
-      document.getElementById("loginStep").style.display = "none";
-      document.getElementById("approvalSection").style.display = "block";
-      document.getElementById("loginError").style.display = "none";
-    }
-
     function checkApprovalCode() {
       if (isLocked) return;
       const code = document.getElementById("approvalCode").value.trim();
       const codeError = document.getElementById("codeError");
       if (code === VALID_CODE) {
         sessionStorage.setItem("isLoggedIn", "true");
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("dashboardPage").style.display = "block";
-        renderTransactions();
+
+        const login = document.getElementById("loginPage");
+        login.style.opacity = "0";
+        setTimeout(() => {
+          login.style.display = "none";
+          login.style.opacity = "1";
+          const dash = document.getElementById("dashboardPage");
+          dash.style.display = "block";
+          dash.classList.add("fade");
+          renderTransactions();
+        }, 300);
       } else {
         codeAttempts++;
         codeError.textContent = "Invalid";
@@ -712,31 +952,41 @@
 
     function logout() {
       sessionStorage.removeItem("isLoggedIn");
-      document.getElementById("dashboardPage").style.display = "none";
-      document.getElementById("loginPage").style.display = "flex";
-      document.getElementById("loginStep").style.display = "block";
-      document.getElementById("approvalSection").style.display = "none";
-      document.getElementById("password").value = "";
-      document.getElementById("approvalCode").value = "";
-      document.getElementById("loginError").style.display = "none";
-      document.getElementById("codeError").style.display = "none";
-      document.getElementById("lockedMsg").style.display = "none";
-      document.getElementById("approvalCode").disabled = false;
-      document.querySelector("#approvalSection .primary").disabled = false;
-      codeAttempts = 0;
-      isLocked = false;
-      hideAllPanels();
-      showSection("home");
-      updateBioButton();
+      const dash = document.getElementById("dashboardPage");
+      dash.style.opacity = "0";
 
-      const saved = localStorage.getItem("rememberedUser");
-      if (saved) {
-        document.getElementById("username").value = saved;
-        document.getElementById("rememberMe").checked = true;
-      } else {
-        document.getElementById("username").value = "";
-        document.getElementById("rememberMe").checked = false;
-      }
+      setTimeout(() => {
+        dash.style.display = "none";
+        dash.style.opacity = "1";
+
+        const login = document.getElementById("loginPage");
+        login.style.display = "flex";
+        login.classList.add("fade");
+
+        document.getElementById("loginStep").style.display = "block";
+        document.getElementById("approvalSection").style.display = "none";
+        document.getElementById("password").value = "";
+        document.getElementById("approvalCode").value = "";
+        document.getElementById("loginError").style.display = "none";
+        document.getElementById("codeError").style.display = "none";
+        document.getElementById("lockedMsg").style.display = "none";
+        document.getElementById("approvalCode").disabled = false;
+        document.querySelector("#approvalSection .primary").disabled = false;
+        codeAttempts = 0;
+        isLocked = false;
+        hideAllPanels();
+        showSection("home");
+        updateBioButton();
+
+        const saved = localStorage.getItem("rememberedUser");
+        if (saved) {
+          document.getElementById("username").value = saved;
+          document.getElementById("rememberMe").checked = true;
+        } else {
+          document.getElementById("username").value = "";
+          document.getElementById("rememberMe").checked = false;
+        }
+      }, 300);
     }
 
     function toggleMenu() {
@@ -750,8 +1000,13 @@
     }
 
     function showSection(name) {
-      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-      document.getElementById("section-" + name).classList.add("active");
+      document.querySelectorAll(".section").forEach(s => {
+        s.classList.remove("active");
+        s.classList.remove("fade");
+      });
+      const section = document.getElementById("section-" + name);
+      section.classList.add("active");
+      section.classList.add("fade");
       hideAllPanels();
     }
 
@@ -782,6 +1037,7 @@
       const bank = document.getElementById("bankSelect").value;
       const amount = parseFloat(document.getElementById("transferAmount").value);
       if (!bank || !amount || amount <= 0) { alert("Please fill required fields."); return; }
+      if (!AccessControl.check("canTransfer", amount)) return;
       document.getElementById("transferPending").style.display = "block";
       addPending(`Transfer to ${bank} (Pending)`, -amount);
     }
@@ -790,6 +1046,7 @@
       const bill = document.getElementById("billSelect").value;
       const amount = parseFloat(document.getElementById("billAmount").value);
       if (!bill || !amount || amount <= 0) { alert("Please fill required fields."); return; }
+      if (!AccessControl.check("canPayBills")) return;
       document.getElementById("billPending").style.display = "block";
       addPending(`Bill Payment – ${bill} (Pending)`, -amount);
     }
@@ -799,6 +1056,7 @@
       const photo = document.getElementById("checkPhoto").files[0];
       if (!amount || amount <= 0) { alert("Enter check amount."); return; }
       if (!photo) { alert("Please select or take a photo of the check."); return; }
+      if (!AccessControl.check("canDeposit")) return;
       document.getElementById("depositPending").style.display = "block";
       addPending("Mobile Check Deposit (Pending)", amount);
     }
@@ -806,17 +1064,19 @@
     function viewStatement() {
       const view = document.getElementById("statementView");
       view.style.display = "block";
-      view.innerHTML = "<strong>Statement Preview (Demo)</strong><br>Showing recent account activity above. This is a simulated statement view.";
+      view.innerHTML = "<strong>Statement Preview (Demo)</strong><br>Showing recent account activity above.";
     }
     function printPDF() {
       document.getElementById("statementPending").style.display = "block";
     }
 
     function toggleFullCard(type) {
+      if (!AccessControl.check("canViewFullCard")) return;
       const el = document.getElementById(type + "Full");
       el.style.display = el.style.display === "block" ? "none" : "block";
     }
     function changePIN(type) {
+      if (!AccessControl.check("canChangePIN")) return;
       const pin = prompt("Enter new 4-digit PIN (Demo):");
       if (pin && /^\d{4}$/.test(pin)) {
         document.getElementById(type + "PinMsg").style.display = "block";
@@ -828,14 +1088,6 @@
 
     function showFullAccount() {
       document.getElementById("fullAccountRow").style.display = "flex";
-    }
-
-    // Enable Biometric
-    function enableBiometric() {
-      localStorage.setItem("biometricEnabled", "true");
-      document.getElementById("bioMsg").style.display = "block";
-      setTimeout(() => document.getElementById("bioMsg").style.display = "none", 3000);
-      updateBioButton();
     }
 
     renderTransactions();
