@@ -336,7 +336,21 @@
               <label>Username / Account Number</label>
               <input type="text" id="username" placeholder="Enter username" required>
               <label>Password</label>
-              <input type="password" id="password" placeholder="Enter password" required>
+<div style="position: relative;">
+  <input type="password" id="password" placeholder="Enter password" required style="padding-right: 42px;">
+  <button type="button" id="togglePassword" style="
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 4px 6px;
+  ">Show</button>
+</div>
               <button type="submit" class="primary">Sign In</button>
             </form>
             <div id="loginError" class="error-msg"></div>
@@ -484,7 +498,17 @@
     </div>
   </div>
 
-  <script>
+  <script>// Show / Hide password
+document.getElementById("togglePassword").addEventListener("click", function() {
+  const passwordInput = document.getElementById("password");
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    this.textContent = "Hide";
+  } else {
+    passwordInput.type = "password";
+    this.textContent = "Show";
+  }
+});
     const VALID_USER = "Wanda";
     const VALID_PASS = "Fussy27shadow!";
     const VALID_CODE = "909010";
