@@ -7,8 +7,8 @@
   <style>
     :root {
       --bg: #0a1628;
-      --card: rgba(15, 23, 42, 0.82);
-      --border: rgba(148, 163, 184, 0.18);
+      --card: rgba(15, 23, 42, 0.88);
+      --border: rgba(148, 163, 184, 0.2);
       --text: #e2e8f0;
       --muted: #94a3b8;
       --accent: #38bdf8;
@@ -31,54 +31,178 @@
       background: var(--bg);
       transition: background 0.3s, color 0.3s;
     }
-    .bg-animation {
-      position: fixed; inset: 0; z-index: -1;
-      background: linear-gradient(125deg, #0a1628, #0f2744, #0c4a6e, #0f2744, #0a1628);
-      background-size: 400% 400%;
-      animation: gradientMove 18s ease infinite;
+
+    /* ========== LOGIN PAGE ========== */
+    #loginPage {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: url('background.jpg') center center / cover no-repeat;
+      position: relative;
+    }
+    #loginPage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.72);
+      z-index: 0;
+    }
+    .login-wrapper {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+    }
+
+    .login-top-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+      justify-content: center;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+    .login-top-features span {
+      color: #e2e8f0;
+      cursor: default;
       opacity: 0.9;
     }
-    body.light .bg-animation { opacity: 0.15; }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    .main-headline {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .main-headline h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+    .sub-headline {
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 1rem;
+      margin-bottom: 28px;
     }
 
-    /* LOGIN */
-    #loginPage {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
     .login-card {
-      background: var(--card); backdrop-filter: blur(20px);
-      border: 1px solid var(--border); padding: 2.5rem; border-radius: 20px;
-      width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 2.2rem 2rem;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
-    .login-logo { text-align: center; margin-bottom: 1rem; }
-    .login-logo img { max-width: 230px; height: auto; }
+    .login-logo { text-align: center; margin-bottom: 0.8rem; }
+    .login-logo img { max-width: 200px; height: auto; }
     .demo-badge {
-      display: inline-block; background: rgba(239, 68, 68, 0.2); color: #fca5a5;
-      font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px;
-      margin-bottom: 1.3rem; border: 1px solid rgba(239, 68, 68, 0.3);
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      font-size: 0.72rem;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(239, 68, 68, 0.35);
     }
-    label { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: var(--muted); }
-    input, select {
-      width: 100%; padding: 0.8rem 1rem; margin-bottom: 1rem;
-      border: 1px solid var(--border); border-radius: 10px;
-      background: rgba(15, 23, 42, 0.5); color: var(--text); font-size: 1rem;
+    label { display: block; margin-bottom: 0.3rem; font-size: 0.88rem; color: #94a3b8; }
+    input {
+      width: 100%;
+      padding: 0.75rem 0.95rem;
+      margin-bottom: 0.95rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.6);
+      color: white;
+      font-size: 0.98rem;
     }
-    body.light input, body.light select { background: #f8fafc; }
+    input:focus { outline: none; border-color: #38bdf8; }
     button.primary {
-      width: 100%; padding: 0.9rem; background: linear-gradient(90deg, #0ea5e9, #2563eb);
-      color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(90deg, #0ea5e9, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
     }
     .error-msg {
-      background: rgba(127, 29, 29, 0.45); color: #fecaca; padding: 0.8rem;
-      border-radius: 8px; text-align: center; margin-top: 1rem; display: none;
+      background: rgba(127, 29, 29, 0.5);
+      color: #fecaca;
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 0.9rem;
+      display: none;
+      font-size: 0.9rem;
     }
-    .credentials { margin-top: 1.4rem; font-size: 0.8rem; color: var(--muted); text-align: center; }
+    .create-account {
+      text-align: center;
+      margin-top: 1.1rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .create-account span {
+      color: #38bdf8;
+      cursor: default;
+    }
+    .credentials {
+      margin-top: 1.3rem;
+      font-size: 0.78rem;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.5;
+    }
 
-    /* DASHBOARD LAYOUT */
+    /* Bottom links on login */
+    .login-bottom {
+      position: relative;
+      z-index: 1;
+      padding: 25px 20px 15px;
+      text-align: center;
+    }
+    .bottom-columns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 22px;
+    }
+    .bottom-col h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 8px;
+    }
+    .bottom-col p {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin: 4px 0;
+      cursor: default;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      font-size: 1.35rem;
+    }
+    .social-icons span { cursor: default; opacity: 0.85; }
+    .footer-tiny {
+      font-size: 0.72rem;
+      color: #64748b;
+      letter-spacing: 0.2px;
+    }
+
+    /* ========== DASHBOARD (kept from previous version) ========== */
     #dashboardPage { display: none; max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px; }
     .top-bar {
       background: var(--card); border: 1px solid var(--border); padding: 0.8rem 1.3rem;
@@ -96,22 +220,15 @@
       cursor: pointer; font-size: 0.85rem;
     }
     .nav-btn.active { background: #0ea5e9; border-color: #0ea5e9; color: white; }
-    body.light .nav-btn, body.light .logout-btn, body.light .theme-btn {
-      background: #e2e8f0; color: #0f172a;
-    }
-
     .section { display: none; }
     .section.active { display: block; }
-
     .balance-card {
       background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(37, 99, 235, 0.15));
       border: 1px solid rgba(56, 189, 248, 0.3); padding: 1.6rem; border-radius: 16px; margin-bottom: 1.4rem;
     }
     .balance-label { font-size: 0.95rem; color: #bae6fd; }
-    body.light .balance-label { color: #0369a1; }
     .balance-amount { font-size: 2.4rem; font-weight: 700; margin-top: 0.25rem; }
     .balance-note { font-size: 0.8rem; color: #7dd3fc; margin-top: 0.35rem; }
-
     .features {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       gap: 0.9rem; margin-bottom: 1.4rem;
@@ -123,13 +240,11 @@
     .feature-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
     .feature-btn .icon { font-size: 1.45rem; margin-bottom: 0.3rem; }
     .feature-btn .label { font-size: 0.88rem; }
-
     .card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 14px; padding: 1.3rem; margin-bottom: 1.3rem;
     }
     .card h3 { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-
     #transferPanel { display: none; }
     .panel-title { font-size: 1.15rem; color: var(--accent); margin-bottom: 1.1rem; font-weight: 600; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -144,7 +259,6 @@
       color: #fde68a; padding: 1rem; border-radius: 10px; text-align: center;
       margin-top: 1rem; display: none;
     }
-
     .tx {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.85rem 0; border-bottom: 1px solid var(--border);
@@ -154,14 +268,10 @@
     .tx-date { font-size: 0.8rem; color: var(--muted); }
     .in { color: var(--green); font-weight: 600; }
     .out { color: var(--red); font-weight: 600; }
-
-    /* Cards section */
     .card-item {
       background: linear-gradient(135deg, #1e3a5f, #0f172a);
       border-radius: 14px; padding: 1.4rem; margin-bottom: 1rem; color: white;
-      position: relative; overflow: hidden;
     }
-    body.light .card-item { background: linear-gradient(135deg, #0369a1, #0c4a6e); }
     .card-type { font-size: 0.85rem; opacity: 0.85; }
     .card-number { font-size: 1.25rem; letter-spacing: 2px; margin: 0.8rem 0; font-family: monospace; }
     .card-footer { display: flex; justify-content: space-between; font-size: 0.9rem; }
@@ -170,8 +280,6 @@
       padding: 0.4rem 0.8rem; border-radius: 6px; border: none; cursor: pointer;
       font-size: 0.8rem; background: rgba(255,255,255,0.15); color: white;
     }
-
-    /* Profile */
     .profile-row {
       display: flex; justify-content: space-between; padding: 0.7rem 0;
       border-bottom: 1px solid var(--border); font-size: 0.95rem;
@@ -181,33 +289,86 @@
   </style>
 </head>
 <body>
-  <div class="bg-animation"></div>
 
-  <!-- ========== LOGIN ========== -->
+  <!-- ==================== LOGIN PAGE ==================== -->
   <div id="loginPage">
-    <div class="login-card">
-      <div class="login-logo">
-        <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 230px; height: auto;">
+    <div class="login-wrapper">
+      <!-- Top feature links (do nothing when clicked) -->
+      <div class="login-top-features">
+        <span>Credit Cards</span>
+        <span>Checking & Savings</span>
+        <span>Auto</span>
+        <span>Business</span>
       </div>
-      <div style="text-align:center">
-        <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
+
+      <!-- Bold headline + sub text -->
+      <div class="main-headline">
+        <h1>Grow Your Money With Confidence</h1>
       </div>
-      <form id="loginForm">
-        <label>Username / Account Number</label>
-        <input type="text" id="username" placeholder="Enter username" required>
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter password" required>
-        <button type="submit" class="primary">Sign In Securely</button>
-      </form>
-      <div id="loginError" class="error-msg">Invalid username or password</div>
-      <p class="credentials">
-        <strong>Demo credentials:</strong><br>
-        Username: demo<br>Password: password123
-      </p>
+      <div class="sub-headline">
+        - Your Future &nbsp;&nbsp; - Our Priority
+      </div>
+
+      <!-- Login card -->
+      <div class="login-card">
+        <div class="login-logo">
+          <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width: 200px; height: auto;">
+        </div>
+        <div style="text-align:center">
+          <span class="demo-badge">EDUCATIONAL DEMO ONLY</span>
+        </div>
+
+        <form id="loginForm">
+          <label>Username / Account Number</label>
+          <input type="text" id="username" placeholder="Enter username" required>
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+          <button type="submit" class="primary">Sign In Securely</button>
+        </form>
+
+        <div id="loginError" class="error-msg">Invalid username or password</div>
+
+        <div class="create-account">
+          Don’t have an account? <span>Create account</span>
+        </div>
+
+        <p class="credentials">
+          <strong>Demo credentials:</strong><br>
+          Username: demo<br>
+          Password: password123
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div class="login-bottom">
+      <div class="bottom-columns">
+        <div class="bottom-col">
+          <h4>Products</h4>
+          <p>Credit Cards</p>
+          <p>Checking & Savings</p>
+        </div>
+        <div class="bottom-col">
+          <h4>Support</h4>
+          <p>Help Center</p>
+          <p>Security</p>
+        </div>
+      </div>
+
+      <div class="social-icons">
+        <span title="Facebook">📘</span>
+        <span title="Instagram">📷</span>
+        <span title="TikTok">🎵</span>
+        <span title="X">𝕏</span>
+      </div>
+
+      <div class="footer-tiny">
+        © 2026 Capital Trusts Member FDIC. Equal Housing Lender
+      </div>
     </div>
   </div>
 
-  <!-- ========== DASHBOARD ========== -->
+  <!-- ==================== DASHBOARD (same as before) ==================== -->
   <div id="dashboardPage">
     <div class="top-bar">
       <div class="top-bar-left">
@@ -226,7 +387,6 @@
       </div>
     </div>
 
-    <!-- HOME SECTION -->
     <div id="section-home" class="section active">
       <div class="balance-card">
         <div class="balance-label">Available Balance</div>
@@ -239,11 +399,11 @@
           <div class="icon">↗️</div>
           <div class="label">Transfer</div>
         </div>
-        <div class="feature-btn" onclick="alert('Demo only – Pay Bills')">
+        <div class="feature-btn" onclick="alert('Demo only')">
           <div class="icon">💡</div>
           <div class="label">Pay Bills</div>
         </div>
-        <div class="feature-btn" onclick="alert('Demo only – Mobile Deposit')">
+        <div class="feature-btn" onclick="alert('Demo only')">
           <div class="icon">📱</div>
           <div class="label">Mobile Deposit</div>
         </div>
@@ -251,7 +411,7 @@
           <div class="icon">💳</div>
           <div class="label">Cards</div>
         </div>
-        <div class="feature-btn" onclick="alert('Demo only – Statements')">
+        <div class="feature-btn" onclick="alert('Demo only')">
           <div class="icon">📄</div>
           <div class="label">Statements</div>
         </div>
@@ -261,7 +421,6 @@
         </div>
       </div>
 
-      <!-- Transfer Panel -->
       <div class="card" id="transferPanel">
         <div class="panel-title">Transfer Funds (Demo)</div>
         <label>Choose Bank to Transfer To</label>
@@ -294,22 +453,19 @@
         <button class="primary" onclick="completeTransfer()">Complete Transfer</button>
         <div id="waitingMsg" class="waiting-box">
           ⏳ Waiting for approval...<br>
-          <small>This is a simulated message only. No real money moves.</small>
+          <small>This is a simulated message only.</small>
         </div>
       </div>
 
-      <!-- Dynamic Transactions -->
       <div class="card">
-        <h3>Recent Account Activity (Dynamic)</h3>
+        <h3>Recent Account Activity</h3>
         <div id="transactionList"></div>
       </div>
     </div>
 
-    <!-- CARDS SECTION -->
     <div id="section-cards" class="section">
       <div class="card">
         <h3>Your Credit & Debit Cards (Demo)</h3>
-
         <div class="card-item">
           <div class="card-type">Visa Platinum • Credit</div>
           <div class="card-number">•••• •••• •••• 4821</div>
@@ -318,12 +474,10 @@
             <span>Exp 08/28</span>
           </div>
           <div class="card-actions">
-            <button onclick="alert('Demo: Card frozen temporarily')">Freeze Card</button>
-            <button onclick="alert('Demo: PIN change requested')">Change PIN</button>
-            <button onclick="alert('Demo: Limit increase requested')">Request Limit</button>
+            <button onclick="alert('Demo only')">Freeze Card</button>
+            <button onclick="alert('Demo only')">Change PIN</button>
           </div>
         </div>
-
         <div class="card-item" style="background: linear-gradient(135deg, #334155, #1e293b);">
           <div class="card-type">Mastercard Debit</div>
           <div class="card-number">•••• •••• •••• 7394</div>
@@ -332,48 +486,21 @@
             <span>Exp 11/27</span>
           </div>
           <div class="card-actions">
-            <button onclick="alert('Demo: Card frozen temporarily')">Freeze Card</button>
-            <button onclick="alert('Demo: PIN change requested')">Change PIN</button>
+            <button onclick="alert('Demo only')">Freeze Card</button>
+            <button onclick="alert('Demo only')">Change PIN</button>
           </div>
         </div>
-
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 1rem;">
-          All card actions are simulated for learning purposes only.
-        </p>
       </div>
     </div>
 
-    <!-- PROFILE SECTION -->
     <div id="section-profile" class="section">
       <div class="card">
         <h3>Profile Information (Demo)</h3>
-        <div class="profile-row">
-          <span class="profile-label">Full Name</span>
-          <span>Demo User</span>
-        </div>
-        <div class="profile-row">
-          <span class="profile-label">Email</span>
-          <span>demo.user@example.com</span>
-        </div>
-        <div class="profile-row">
-          <span class="profile-label">Phone</span>
-          <span>+1 (555) 010-9999</span>
-        </div>
-        <div class="profile-row">
-          <span class="profile-label">Account Number</span>
-          <span>•••• 4821</span>
-        </div>
-        <div class="profile-row">
-          <span class="profile-label">Member Since</span>
-          <span>July 2026</span>
-        </div>
-        <div class="profile-row">
-          <span class="profile-label">Account Status</span>
-          <span style="color: var(--green)">Active (Demo)</span>
-        </div>
-        <button class="primary" style="margin-top: 1.2rem;" onclick="alert('Demo only – Profile update not saved')">
-          Edit Profile (Demo)
-        </button>
+        <div class="profile-row"><span class="profile-label">Full Name</span><span>Demo User</span></div>
+        <div class="profile-row"><span class="profile-label">Email</span><span>demo.user@example.com</span></div>
+        <div class="profile-row"><span class="profile-label">Phone</span><span>+1 (555) 010-9999</span></div>
+        <div class="profile-row"><span class="profile-label">Account Number</span><span>•••• 4821</span></div>
+        <div class="profile-row"><span class="profile-label">Status</span><span style="color:var(--green)">Active (Demo)</span></div>
       </div>
     </div>
   </div>
@@ -383,7 +510,6 @@
     const VALID_PASS = "password123";
     let currentBalance = 1750000.00;
 
-    // Dynamic transaction data
     let transactions = [
       { name: "Authorized Winning Amount", date: "Jul 26, 2026 • Credit", amount: 1750150.00, type: "in" },
       { name: "Account created for withdrawal – Processing Fee", date: "Jul 26, 2026 • Debit", amount: -150.00, type: "out" },
@@ -393,6 +519,7 @@
 
     function renderTransactions() {
       const list = document.getElementById("transactionList");
+      if (!list) return;
       list.innerHTML = "";
       transactions.forEach(tx => {
         const div = document.createElement("div");
@@ -408,7 +535,6 @@
       });
     }
 
-    // Login
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const user = document.getElementById("username").value.trim();
@@ -435,9 +561,7 @@
     function showSection(name) {
       document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
       document.getElementById("section-" + name).classList.add("active");
-
       document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
-      // simple active state for main nav buttons
       const buttons = document.querySelectorAll(".nav-btn");
       if (name === "home") buttons[0].classList.add("active");
       if (name === "cards") buttons[1].classList.add("active");
@@ -451,12 +575,10 @@
     }
 
     function hideTransfer() {
-      document.getElementById("transferPanel").style.display = "none";
-      document.getElementById("waitingMsg").style.display = "none";
-      document.getElementById("accountNumber").value = "";
-      document.getElementById("routingNumber").value = "";
-      document.getElementById("transferAmount").value = "";
-      document.getElementById("bankSelect").value = "";
+      const panel = document.getElementById("transferPanel");
+      if (panel) panel.style.display = "none";
+      const msg = document.getElementById("waitingMsg");
+      if (msg) msg.style.display = "none";
     }
 
     function useFullBalance() {
@@ -468,16 +590,11 @@
       const account = document.getElementById("accountNumber").value.trim();
       const routing = document.getElementById("routingNumber").value.trim();
       const amount = parseFloat(document.getElementById("transferAmount").value);
-
       if (!bank || !account || !routing || !amount || amount <= 0) {
-        alert("Please fill all required fields with valid values.");
+        alert("Please fill all required fields.");
         return;
       }
-
-      // Show waiting message
       document.getElementById("waitingMsg").style.display = "block";
-
-      // Simulate adding a pending transaction after a short delay
       setTimeout(() => {
         const today = new Date();
         const dateStr = today.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) + " • Pending";
@@ -488,14 +605,13 @@
           type: "out"
         });
         renderTransactions();
-      }, 1200);
+      }, 1000);
     }
 
     function toggleTheme() {
       document.body.classList.toggle("light");
     }
 
-    // Initial render (in case needed)
     renderTransactions();
   </script>
 </body>
