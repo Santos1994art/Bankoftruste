@@ -8,7 +8,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
 
-    /* LOGIN PAGE */
     #loginPage {
       min-height: 100vh;
       display: flex;
@@ -122,7 +121,8 @@
       font-size: 0.82rem;
       color: #94a3b8;
     }
-    input {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       padding: 0.6rem 0.8rem;
       margin-bottom: 0.75rem;
@@ -134,7 +134,6 @@
     }
     input:focus { outline: none; border-color: #38bdf8; }
 
-    /* Password with eye icon */
     .password-wrapper {
       position: relative;
       margin-bottom: 0.75rem;
@@ -152,6 +151,20 @@
       font-size: 1.15rem;
       color: #94a3b8;
       user-select: none;
+    }
+
+    .remember-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.9rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .remember-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
     }
 
     button.primary {
@@ -362,6 +375,12 @@
                 <span id="togglePassword">👁️</span>
               </div>
 
+              <!-- Remember me -->
+              <div class="remember-row">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe" style="margin:0; cursor:pointer;">Remember my login</label>
+              </div>
+
               <button type="submit" class="primary">Sign In</button>
             </form>
             <div id="loginError" class="error-msg"></div>
@@ -510,7 +529,7 @@
   </div>
 
   <script>
-    // Show / Hide password with eye icon
+    // Show / Hide password
     document.getElementById("togglePassword").addEventListener("click", function() {
       const passwordInput = document.getElementById("password");
       if (passwordInput.type === "password") {
@@ -519,6 +538,15 @@
       } else {
         passwordInput.type = "password";
         this.textContent = "👁️";
+      }
+    });
+
+    // Load remembered username when page opens
+    window.addEventListener("DOMContentLoaded", function() {
+      const savedUser = localStorage.getItem("rememberedUser");
+      if (savedUser) {
+        document.getElementById("username").value = savedUser;
+        document.getElementById("rememberMe").checked = true;
       }
     });
 
@@ -561,9 +589,17 @@
 
       const user = document.getElementById("username").value.trim();
       const pass = document.getElementById("password").value;
+      const remember = document.getElementById("rememberMe").checked;
       const error = document.getElementById("loginError");
 
       if (user === VALID_USER && pass === VALID_PASS) {
+        // Save or remove remembered username
+        if (remember) {
+          localStorage.setItem("rememberedUser", user);
+        } else {
+          localStorage.removeItem("rememberedUser");
+        }
+
         document.getElementById("loginStep").style.display = "none";
         document.getElementById("approvalSection").style.display = "block";
         error.style.display = "none";
@@ -604,7 +640,6 @@
       document.getElementById("loginPage").style.display = "flex";
       document.getElementById("loginStep").style.display = "block";
       document.getElementById("approvalSection").style.display = "none";
-      document.getElementById("username").value = "";
       document.getElementById("password").value = "";
       document.getElementById("approvalCode").value = "";
       document.getElementById("loginError").style.display = "none";
@@ -616,6 +651,16 @@
       isLocked = false;
       hideTransfer();
       showSection("home");
+
+      // Keep remembered username if it exists
+      const savedUser = localStorage.getItem("rememberedUser");
+      if (savedUser) {
+        document.getElementById("username").value = savedUser;
+        document.getElementById("rememberMe").checked = true;
+      } else {
+        document.getElementById("username").value = "";
+        document.getElementById("rememberMe").checked = false;
+      }
     }
 
     function showSection(name) {
