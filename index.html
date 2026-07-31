@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bank of Trusts - Educational Demo Only</title>
+  <title>Bank of Trusts - </title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
     body { min-height: 100vh; color: #e2e8f0; background: #0a1628; }
@@ -52,7 +52,7 @@
     }
     .login-logo { text-align: center; margin-bottom: 0.4rem; }
     .login-logo img { max-width: 140px; height: auto; }
-    .demo-badge {
+    .-badge {
       display: inline-block; background: rgba(239,68,68,0.22); color: #fca5a5;
       font-size: 0.62rem; padding: 0.18rem 0.55rem; border-radius: 999px;
       margin-bottom: 0.7rem; border: 1px solid rgba(239,68,68,0.3);
@@ -441,7 +441,7 @@
           <div class="login-logo">
             <img src="logo.jpg" alt="Bank of Trusts Logo" style="max-width:140px;">
           </div>
-          <div style="text-align:center"><span class="demo-badge">EDUCATIONAL DEMO ONLY</span></div>
+          <div style="text-align:center"><span class=-badge"></span></div>
 
           <div id="loginStep">
             <form id="loginForm" autocomplete="on">
@@ -475,7 +475,7 @@
             <button class="primary" onclick="checkApprovalCode()">Verify Code</button>
             <div id="codeError" class="error-msg"></div>
             <div id="lockedMsg" class="locked-msg">
-              Account locked due to too many incorrect attempts.<br>Please contact support (Demo only).
+              Account locked due to too many incorrect attempts.<br>Please contact support .
             </div>
           </div>
         </div>
@@ -534,7 +534,7 @@
           <div class="balance-amount blurred" id="balanceAmount" onclick="toggleBalance()">
             $1,750,000.00
           </div>
-          <div class="balance-note">Demo account • Click amount to show/hide</div>
+          <div class="balance-note"> • Click amount to show/hide</div>
         </div>
 
         <div class="features">
@@ -548,7 +548,7 @@
 
         <!-- Transfer -->
         <div class="card" id="transferPanel">
-          <div class="panel-title">Transfer Funds (Demo)</div>
+          <div class="panel-title">Transfer Funds </div>
           <label>Choose Bank</label>
           <select id="bankSelect">
             <option value="">-- Select a bank --</option>
@@ -569,7 +569,7 @@
 
         <!-- Pay Bills -->
         <div class="card" id="billsPanel">
-          <div class="panel-title">Pay Bills (Demo)</div>
+          <div class="panel-title">Pay Bills </div>
           <label>Select Bill</label>
           <select id="billSelect">
             <option value="">-- Choose a bill --</option>
@@ -597,7 +597,7 @@
 
         <!-- Mobile Deposit -->
         <div class="card" id="depositPanel">
-          <div class="panel-title">Mobile Deposit (Demo)</div>
+          <div class="panel-title">Mobile Deposit </div>
           <p style="font-size:0.85rem;color:#94a3b8;margin-bottom:10px;">Step 1: Take or upload a photo of the check</p>
           <input type="file" id="checkPhoto" accept="image/*" capture="environment" style="margin-bottom:10px;">
           <label>Check Amount ($)</label>
@@ -608,11 +608,11 @@
 
         <!-- Statements -->
         <div class="card" id="statementsPanel">
-          <div class="panel-title">Account Statements (Demo)</div>
+          <div class="panel-title">Account Statements </div>
           <p style="margin-bottom:10px;font-size:0.85rem;color:#94a3b8;">View recent activity or request a PDF statement.</p>
           <button class="primary" style="margin-bottom:8px;" onclick="viewStatement()">View Statement on Page</button>
           <button class="full-btn" onclick="printPDF()">Print / Download PDF</button>
-          <div id="statementPending" class="pending-box">⏳ Pending – PDF statement request received (Demo)</div>
+          <div id="statementPending" class="pending-box">⏳ Pending – PDF statement request received </div>
           <div id="statementView" style="display:none;margin-top:12px;font-size:0.85rem;"></div>
         </div>
 
@@ -625,7 +625,7 @@
       <!-- CARDS -->
       <div id="section-cards" class="section">
         <div class="card">
-          <h3>Your Cards (Demo)</h3>
+          <h3>Your Cards </h3>
 
           <div class="card-item">
             <div class="card-type">Visa Platinum • Credit</div>
@@ -640,12 +640,12 @@
               <button onclick="changePIN('credit')">Change PIN</button>
             </div>
             <div class="full-details" id="creditFull">
-              <strong>Full Card Number (Demo):</strong> 4531 5221 8625 4821<br>
+              <strong>Full Card Number :</strong> 4531 5221 8625 4821<br>
               <strong>Expiry:</strong> 08/28<br>
               <strong>CVV:</strong> 662<br>
-              <em>These are fake demo numbers only.</em>
+              <em></em>
             </div>
-            <div id="creditPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
+            <div id="creditPinMsg" class="success-msg">PIN changed successfully </div>
           </div>
 
           <div class="card-item debit">
@@ -661,12 +661,12 @@
               <button onclick="changePIN('debit')">Change PIN</button>
             </div>
             <div class="full-details" id="debitFull">
-              <strong>Full Card Number (Demo):</strong> 5591 7415 5751 7394<br>
+              <strong>Full Card Number :</strong> 5591 7415 5751 7394<br>
               <strong>Expiry:</strong> 11/27<br>
               <strong>CVV:</strong> 456<br>
-              <em>These are fake demo numbers only.</em>
+              <em></em>
             </div>
-            <div id="debitPinMsg" class="success-msg">PIN changed successfully (Demo)</div>
+            <div id="debitPinMsg" class="success-msg">PIN changed successfully </div>
           </div>
         </div>
       </div>
@@ -700,7 +700,7 @@
           </div>
           <div class="profile-row" id="fullAccountRow" style="display:none;">
             <span class="profile-label">Full Account Number</span>
-            <span>4326060748 (Demo)</span>
+            <span>4326060748 </span>
           </div>
           <div class="profile-row">
             <span class="profile-label">Status</span>
@@ -721,7 +721,7 @@
           </div>
 
           <div class="policy-panel" id="policyPanel">
-            <h4>Access Control Policies (Educational Demo)</h4>
+            <h4>Access Control Policies </h4>
 
             <div class="policy-row">
               <label>Allow Transfers</label>
@@ -792,11 +792,11 @@
       },
       check(action, amount = 0) {
         if (!this.policies[action]) {
-          alert("Access Denied: You do not have permission for this action.\n(Demo Policy)");
+          alert("Access Denied: You do not have permission for this action.\n");
           return false;
         }
         if (action === "canTransfer" && amount > this.policies.maxTransferAmount) {
-          alert(`Access Denied: Amount exceeds the maximum allowed transfer of $${this.policies.maxTransferAmount.toLocaleString()}.\n(Demo Policy)`);
+          alert(`Access Denied: Amount exceeds the maximum allowed transfer of $${this.policies.maxTransferAmount.toLocaleString()}.\n`);
           return false;
         }
         return true;
@@ -848,12 +848,12 @@
         const publicKey = {
           challenge: challenge,
           rp: {
-            name: "Bank of Trusts Demo",
+            name: "Bank of Trusts",
             id: window.location.hostname === "" ? "localhost" : window.location.hostname
           },
           user: {
             id: new Uint8Array(16),
-            name: "wanda@demo.local",
+            name: "wanda.local",
             displayName: "Wanda Agundez"
           },
           pubKeyCredParams: [
@@ -1157,7 +1157,7 @@
     function viewStatement() {
       const view = document.getElementById("statementView");
       view.style.display = "block";
-      view.innerHTML = "<strong>Statement Preview (Demo)</strong><br>Showing recent account activity above.";
+      view.innerHTML = "<strong>Statement Preview </strong><br>Showing recent account activity above.";
     }
     function printPDF() {
       document.getElementById("statementPending").style.display = "block";
@@ -1170,7 +1170,7 @@
     }
     function changePIN(type) {
       if (!AccessControl.check("canChangePIN")) return;
-      const pin = prompt("Enter new 4-digit PIN (Demo):");
+      const pin = prompt("Enter new 4-digit PIN :");
       if (pin && /^\d{4}$/.test(pin)) {
         document.getElementById(type + "PinMsg").style.display = "block";
         setTimeout(() => document.getElementById(type + "PinMsg").style.display = "none", 3000);
