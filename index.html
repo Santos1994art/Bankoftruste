@@ -72,6 +72,12 @@
       width: 100%; padding: 0.68rem; background: linear-gradient(90deg,#0ea5e9,#2563eb);
       color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
     }
+    .bio-login-btn {
+      width: 100%; padding: 0.68rem; margin-top: 10px;
+      background: rgba(15,23,42,0.7); border: 1px solid rgba(56,189,248,0.4);
+      color: #7dd3fc; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      display: none;
+    }
     .error-msg {
       background: rgba(127,29,29,0.5); color: #fecaca; padding: 0.6rem;
       border-radius: 8px; text-align: center; margin-top: 0.7rem; display: none; font-size: 0.86rem;
@@ -101,15 +107,8 @@
     #dashboardPage {
       display: none;
       min-height: 100vh;
-      background: url('dashboard-bg.jpg') center center / cover no-repeat;
+      background: linear-gradient(135deg, #0a1628, #0f2744);
       position: relative;
-    }
-    #dashboardPage::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 22, 40, 0.78);
-      z-index: 0;
     }
     .dashboard-inner {
       position: relative;
@@ -164,7 +163,6 @@
     .section { display: none; }
     .section.active { display: block; }
 
-    /* Profile picture first, then balance */
     .dash-header {
       display: flex;
       align-items: center;
@@ -334,6 +332,12 @@
               </div>
               <button type="submit" class="primary">Sign In</button>
             </form>
+
+            <!-- Biometric Login Button (appears after enabling) -->
+            <button class="bio-login-btn" id="bioLoginBtn" onclick="biometricLogin()">
+              🔒 Sign in with Biometrics
+            </button>
+
             <div id="loginError" class="error-msg"></div>
             <div class="create-account">Don’t have an account? <span>Create account</span></div>
           </div>
@@ -387,16 +391,14 @@
 
       <!-- HOME -->
       <div id="section-home" class="section active">
-        <!-- Profile picture first -->
         <div class="dash-header">
-          <img src="dashboard-bg.jpg" alt="Profile" class="dash-profile-pic" onerror="this.src='profile.jpg'">
+          <img src="profile.jpg" alt="Profile" class="dash-profile-pic" onerror="this.src='logo.jpg'">
           <div>
             <div class="dash-welcome">Wanda Agundez</div>
             <div class="dash-sub">Primary Account Holder • Active</div>
           </div>
         </div>
 
-        <!-- Then balance -->
         <div class="balance-card">
           <div class="balance-label">Available Balance</div>
           <div class="balance-amount">$1,750,000.00</div>
@@ -541,7 +543,7 @@
       <div id="section-profile" class="section">
         <div class="card">
           <div class="profile-header">
-            <img src="dashboard-bg.jpg" alt="Profile" class="profile-pic" onerror="this.src='profile.jpg'">
+            <img src="profile.jpg" alt="Profile" class="profile-pic" onerror="this.src='logo.jpg'">
             <div>
               <div style="font-size:1.15rem;font-weight:700;">Wanda Agundez</div>
               <div style="color:#94a3b8;font-size:0.85rem;">Primary Account Holder</div>
@@ -585,12 +587,20 @@
   </div>
 
   <script>
+    // Check if biometric is enabled
+    function updateBioButton() {
+      const enabled = localStorage.getItem("biometricEnabled") === "true";
+      const btn = document.getElementById("bioLoginBtn");
+      if (btn) btn.style.display = enabled ? "block" : "none";
+    }
+
     function checkLoginState() {
       if (sessionStorage.getItem("isLoggedIn") === "true") {
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("dashboardPage").style.display = "block";
         renderTransactions();
       }
+      updateBioButton();
     }
 
     window.addEventListener("DOMContentLoaded", function() {
@@ -644,6 +654,7 @@
       });
     }
 
+    // Normal login
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       if (isLocked) return;
@@ -663,6 +674,18 @@
         error.style.display = "block";
       }
     });
+
+    // Biometric login (skips password)
+    function biometricLogin() {
+      if (localStorage.getItem("biometricEnabled") !== "true") {
+        alert("Biometric login is not enabled yet.");
+        return;
+      }
+      // Simulate successful biometric scan
+      document.getElementById("loginStep").style.display = "none";
+      document.getElementById("approvalSection").style.display = "block";
+      document.getElementById("loginError").style.display = "none";
+    }
 
     function checkApprovalCode() {
       if (isLocked) return;
@@ -704,6 +727,7 @@
       isLocked = false;
       hideAllPanels();
       showSection("home");
+      updateBioButton();
 
       const saved = localStorage.getItem("rememberedUser");
       if (saved) {
@@ -806,9 +830,12 @@
       document.getElementById("fullAccountRow").style.display = "flex";
     }
 
+    // Enable Biometric
     function enableBiometric() {
+      localStorage.setItem("biometricEnabled", "true");
       document.getElementById("bioMsg").style.display = "block";
       setTimeout(() => document.getElementById("bioMsg").style.display = "none", 3000);
+      updateBioButton();
     }
 
     renderTransactions();
